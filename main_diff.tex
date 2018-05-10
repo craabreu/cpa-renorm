@@ -1,0 +1,972 @@
+%\documentclass{article}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL main.tex                Thu Apr 19 13:11:34 2018
+%DIF ADD main_rev_charlles.tex   Thu Apr  5 20:37:44 2018
+%\documentclass[11pt,twocolumn]{article}
+\documentclass[preprint,12pt,3p]{elsarticle}
+\usepackage[utf8]{inputenc}
+%\usepackage{authblk}
+
+%DIF 7a7-8
+ %DIF > 
+ %DIF > 
+%DIF -------
+\linespread{2}
+%DIF 8a10-11
+\usepackage[author=Charlles]{pdfcomment} %DIF > 
+\usepackage[version=4]{mhchem} %DIF > 
+%DIF -------
+
+%DIF 9a13-14
+ %DIF > 
+ %DIF > 
+%DIF -------
+\date{\vspace{-5ex}}
+
+%\usepackage[numbers,sort&compress]{natbib}
+\usepackage{natbib}
+%\usepackage{graphicx}
+\usepackage{caption}
+%\usepackage{a4wide}   %Change margins
+\usepackage{multirow} %Enable merged cells in columns
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[title]{appendix}
+\usepackage{indentfirst}
+\usepackage[section]{placeins}
+
+\usepackage{tikz}
+\DeclareRobustCommand\fulline{\tikz[baseline=-0.6ex]\draw[thick] (0,0)--(0.5,0);}
+\DeclareRobustCommand\dashedline{\tikz[baseline=-0.6ex]\draw[thick,dashed] (0,0)--(0.54,0);}
+
+\usepackage{nomencl}
+\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+\newcommand\Nomenclature[2]{\nomenclature[#2]{#1}{#2}}
+
+\usepackage{etoolbox}
+\renewcommand\nomgroup[1]{%
+  \item[\bfseries
+  \ifstrequal{#1}{A}{Abbreviantions}{%
+  \ifstrequal{#1}{R}{Roman Letters}{%
+  \ifstrequal{#1}{G}{Greek Letters}{%
+  \ifstrequal{#1}{S}{Super/subscripts}{%
+  \ifstrequal{#1}{L}{List of Symbols}{}}}}}%
+]}
+
+\usepackage{cleveref}
+
+\usepackage{lineno}
+%DIF 45-46d51
+%DIF < 
+%DIF < \usepackage[version=4]{mhchem}
+%DIF -------
+
+\journal{Fluid Phase Equilibria}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Renormalization Group Theory Applied to the CPA Equation of State: Impacts on Phase Equilibrium and Derivative Properties}
+
+%\maketitle
+
+\author[1]{Gabriel M. Silva}
+\author[1]{Charlles R.A. Abreu}
+\author[1,2]{Frederico W. Tavares}
+\address[1]{Escola de Química, Universidade Federal do Rio de Janeiro, Rio de Janeiro C.P. 68542, Brazil}
+\address[2]{Programa de Engenharia Química – COPPE, Universidade Federal do Rio de Janeiro, Rio de Janeiro, C.P. 68542, Brazil}
+
+\begin{abstract}
+Calculation of thermodynamic properties such as vapor-liquid phase equilibrium with equations of state is largely and successfully employed in chemical engineering. However, in the proximities of the critical point, the different density-fluctuation scales inherent to critical phenomena introduce significant changes in these thermodynamic properties, with which the classical equations of state are not prepared to deal. Aiming at correcting this failure, a renormalization group methodology has been applied to the CPA equation of state in order to improve the thermodynamic description in the vicinity of critical points, both for vapor-liquid equilibrium of pure components and binary mixtures and for derivative properties such as speed of sound and heat capacity. The results show that the applied methodology is able to provide an equation of state with the correct non-classical behavior, thus bringing it in consonance with experimental observations for derivative properties and vapor-liquid equilibrium in near-critical conditions.\DIFaddbegin \pdfcomment{sem explicar, "supercritical vapor-liquid equilibrium" soa muito estranho}
+\DIFaddend \end{abstract}
+
+\begin{keyword}
+Renormalization \sep Cubic-Plus-Association \sep Phase Equilibria \sep Derivative Properties
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+%\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesection}{\arabic{section}}
+\section{Introduction}
+
+    The development of industrial processes requires models capable of describing fluid behavior and properties with accuracy. The equations of state are very successful tools when used to calculate thermodynamic properties of fluids far away from their critical points. However, they fail in near-critical, critical\DIFaddbegin \DIFadd{, }\DIFaddend and supercritical conditions, in which fluids undergo several changes in their classical behavior \DIFdelbegin \DIFdel{~}\DIFdelend \cite{sengers1986thermodynamic}.
+
+	Many unit operations in engineering involve high pressure or high temperature conditions, in which many mixtures approach critical and/or supercritical states. Common examples occur in natural gas processing, in which the natural gas can form mixtures with \ce{CO_2} and \DIFdelbegin \DIFdel{\ce{H_{2}S} }\DIFdelend \DIFaddbegin \DIFadd{\ce{H_2} }\DIFaddend and be found in near- or supercritical states either at reservoir or at transport/operating conditions \DIFdelbegin \DIFdel{~}\DIFdelend \citep{kermani2003carbon}.
+
+    Experimentally, it is observed that fluids exhibit a universal non-classical behavior in the vicinity of critical points, which is evidenced in the so-called critical exponents \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{carles2010brief}}%DIFAUXCMD
+. One theoretical explanation is that, at the critical point, the correlation length is in the order of the system size and, because only fluctuations with wavelengths below the correlation length have an expressive impact on the free energy of a fluid, long-wavelength interactions play a major role in the near-critical region. This mechanism gives rise to fluctuations that imply significant changes to the fluids properties}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{carles2010brief}}%DIFAUXCMD
+. }\hl{One theoretical explanation is that, at the critical point, the correlation length is in the order of the system size and, because only fluctuations with wavelengths below the correlation length have an expressive impact on the free energy of a fluid, long-wavelength interactions play a major role in the near-critical region, giving rise to fluctuations that imply significant changes to the fluids properties}\pdfcomment{Sentença muito longa}\DIFaddend . Far away from the critical point, instead, the correlation length is in the order of magnitude of the molecule diameters, thus diminishing the influence of long-range interactions and giving the short-range repulsive forces a major role.
+
+    Equations of state are commonly used to model fluids in industrial processes. For instance, the Soave-Redlich-Kwong (SRK) \DIFdelbegin \DIFdel{~}\DIFdelend \cite{soave1972equilibrium} and Peng-Robinson (PR) \DIFdelbegin \DIFdel{~}\DIFdelend \cite{peng1976new} equations of state are used in a wide range of applications. However, for some applications in which molecules are capable of making hydrogen-bonds, both equations present poor performance in representing liquid phases, both for phase equilibrium and derivative properties. In order to overcome this limitation, Kontogeorgis \textit{et al}. \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{kontogeorgis1996equation} }%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \pdfcomment{tentei usar o comando 'citeauthor' do natbib, mas não funcionou... não descobri o motivo} \DIFadd{\mbox{%DIFAUXCMD
+\cite{kontogeorgis1996equation} }%DIFAUXCMD
+}\DIFaddend combined the SRK equation of state with Wertheim's first-order thermodynamic perturbation theory (TPT-1), such as in SAFT \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{chapman1990new}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{chapman1990new}}%DIFAUXCMD
+}\DIFaddend , and the resulting equation of state (Cubic-Plus-Association, CPA) is capable of representing with better accuracy phase equilibrium and derivative properties of pure substances and mixtures far from critical points.
+
+	\DIFdelbegin \DIFdel{The lack of accuracy of classical equations of state in describing thermodynamic properties in conditions near- and at the critical point }\DIFdelend \DIFaddbegin \hl{Common equations of state, both cubic (e.g. SRK) and non-cubic (e.g. SAFT), are able to describe, respecting their limitations, vapor-liquid equilibrium far from the critical point with acceptable accuracy }\DIFadd{\mbox{%DIFAUXCMD
+\cite{orbey1998modeling}}%DIFAUXCMD
+. }\hl{However, when pressure and temperature conditions approach the critical state, equations of state fail to describe thermodynamic properties}\DIFadd{. }\pdfcomment{Toda essa parte destacada parece repetir o que já foi dito antes} \DIFadd{This failure }\DIFaddend is evidenced by the fact that \DIFdelbegin \DIFdel{they }\DIFdelend \DIFaddbegin \DIFadd{all classical equations of state }\DIFaddend predict a critical exponent of $1/2$, while the value actually observed experimentally is $1/3$ \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{sengers1974van,wyczalkowska2004critical,stanley1999scaling}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{sengers1974van, wyczalkowska2004critical, stanley1999scaling}}%DIFAUXCMD
+}\DIFaddend . Somewhat common in the literature are strategies to improve the description of critical behavior by equations of state based on reestimating parameters, with rather good results being achieved \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{palma2017re}}%DIFAUXCMD
+. }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{palma2017re}}%DIFAUXCMD
+. }\pdfcomment{Diz-se que é comum obter bons resultandos, mas só se apresenta uma referência} \DIFaddend However, in \DIFdelbegin \DIFdel{some other cases, }\DIFdelend \DIFaddbegin \hl{some other cases}\DIFadd{, }\pdfcomment{quais outros casos?} \DIFaddend the new parameters are able to describe only the vicinity of the critical point, losing accuracy in conditions far from it. In all cases, however, due to the nature of equations of state one cannot correct the scaling of critical phenomena by simply reestimating parameters.
+
+    The equations of state are mean-field theories by nature, and hence do not treat density fluctuations correctly as the fluid approach the critical point. Consequently, the critical exponents which they predict differ from those obtained from experiments. Many theories aim to correct the behavior of classical equations of state. Some methods are based on the hierarchical reference theory \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{parola1984liquid,parola1985hierarchical,meroni1990differential,meroni1993differential}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{parola1984liquid, parola1985hierarchical, meroni1990differential, meroni1993differential}}%DIFAUXCMD
+}\DIFaddend . However, these methods have not been frequently developed and applied because of its mathematical complexity. Another category of methods is based on a renormalized Landau expansion of the free energy \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{wyczalkowska2004critical,chen1990crossover,kiselev1991universal,kiselev1998cubic,anisimov1992crossover,kiselev1999cubic,kiselev1999crossover}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{wyczalkowska2004critical, chen1990crossover, kiselev1991universal, kiselev1998cubic, anisimov1992crossover, kiselev1999cubic, kiselev1999crossover}}%DIFAUXCMD
+}\DIFaddend , which introduces a \DIFdelbegin \DIFdel{crossover behavior }\DIFdelend \DIFaddbegin \hl{crossover behavior} \pdfcomment{o que isso significa?} \DIFaddend to the equations of state, turning them into non-analytical models with many adjustable parameters. The last category of methods, developed by \DIFdelbegin \DIFdel{White and Zhang~\mbox{%DIFAUXCMD
+\cite{white1993renormalization,white1995renormalization,white1998renormalization}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \hl{White and Zhang} \pdfcomment{Só se usa "et al." quando há três ou mais autores} \DIFadd{\mbox{%DIFAUXCMD
+\cite{white1993renormalization, white1995renormalization, white1998renormalization}}%DIFAUXCMD
+}\DIFaddend , relies on the renormalization group (RG) theory via Phase Space Cell Approximation \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{wilson1971renormalization, wilson1971brenormalization}}%DIFAUXCMD
+}\DIFaddend . This method introduces a recursive procedure intended to renormalize the free energy obtained from equations of state. \DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < 	%%%
+\DIFdelend With this approach, it is possible to treat the problem of fluctuations in different scales, evolving from fluctuations in the microscopic scale up to the macroscopic measured scale in a recursive manner. Thus, it is possible, using common equations of state, to better represent phase equilibrium and thermodynamic properties of pure substances and mixtures in conditions that comprehend near-critical and supercritical states.
+
+	Since its first application  \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{white1993renormalization}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{white1993renormalization}}%DIFAUXCMD
+}\DIFaddend , White and Zhang\DIFdelbegin \DIFdel{’}\DIFdelend \DIFaddbegin \DIFadd{'}\DIFaddend s recursive method has been improved by a number of authors. The same authors extended the range in which the method could be applied  \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{white1998renormalization}}%DIFAUXCMD
+, }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{white1998renormalization}}%DIFAUXCMD
+. }\DIFaddend Lue and Prausnitz \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{lue1998renormalization,lue1998brenormalization} }%DIFAUXCMD
+and Mi et al. ~}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{lue1998renormalization, lue1998brenormalization} }%DIFAUXCMD
+and Mi }\textit{\DIFadd{et al}}\DIFadd{. }\DIFaddend \cite{mi2004improved} improved the method so that is can be applied to the whole range of temperature, even far away from the critical point. \DIFdelbegin \DIFdel{Up to this publication}\DIFdelend \DIFaddbegin \hl{Up to this publication} \pdfcomment{Qual publicação? A nossa? Se for, não precisa dizer.}\DIFaddend , many authors have applied this method using different mean-field theories (e.g. MSA \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{lue1998renormalization}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{lue1998renormalization}}%DIFAUXCMD
+}\DIFaddend , equation of state for chain fluids \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{jiang1999equation,jiang2000phase}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{jiang1999equation, jiang2000phase}}%DIFAUXCMD
+}\DIFaddend , SAFT equation of state and its variations \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{llovell2004thermodynamic,forte2011application,bymaster2008renormalization,tang2010renormalization,llovell2006global,forte2013application,dias2009thermodynamic,llovell2006second,llovell2006prediction,llovell2007phase}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{llovell2004thermodynamic, forte2011application, bymaster2008renormalization, tang2010renormalization, llovell2006global, forte2013application, dias2009thermodynamic, llovell2006second, llovell2006prediction, llovell2007phase}}%DIFAUXCMD
+}\DIFaddend , cubic equations of state  \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{xu2011prediction,xu2010crossover,pcm2017application,llovell2008accurate,qiu2006vapor,cai2006vapor,cai2004thermodynamics}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{xu2011prediction, xu2010crossover, pcm2017application, llovell2008accurate, qiu2006vapor, cai2006vapor, cai2004thermodynamics}}%DIFAUXCMD
+}\DIFaddend , and others \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{ghobadi2013renormalization,choi2016renormalization}}%DIFAUXCMD
+)}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{ghobadi2013renormalization, choi2016renormalization}}%DIFAUXCMD
+), }\DIFaddend obtaining similar results. However, some aspect in the method are still unclear, e.g. parameter estimation procedures and approximations in the renormalization equations. There is still need for further assessment of the method's capabilities and limitations.
+
+	This work aims at evaluating the impacts on modeling phase equilibrium and derivative properties when applying the renormalization group theory with the CPA equation of state, referred to as the CPA+RG approach for short. We studied pure substances and different mixtures including \ce{CO_2} and \DIFdelbegin \DIFdel{\ce{H_{2}S}}\DIFdelend \DIFaddbegin \DIFadd{\ce{H_2S}}\DIFaddend , in conditions near-to and far from the critical point. We provide a parameter estimation procedure that improves the methodology.
+
+	This article is divided as follows\DIFdelbegin \DIFdel{: }\DIFdelend \DIFaddbegin \DIFadd{. }\DIFaddend First, we discuss briefly on the applied mean-field theory (the CPA equation of state) and the renormalization-group methodology. This is followed by details of the numerical procedures. Then, we present phase equilibrium results of pure and binary mixtures, as well as results for derivative properties such as heat capacity and speed of sound. Finally, we present some concluding remarks.
+
+\section{Thermodynamic Modeling}
+\DIFaddbegin 
+
+    \DIFaddend Pure substances and binary mixtures in vapor-liquid equilibrium and at supercritical conditions were evaluated using the Cubic-Plus-Association equation of state \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{kontogeorgis1996equation}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{kontogeorgis1996equation}}%DIFAUXCMD
+}\DIFaddend . In the pressure-explicit form, such equation reads
+\begin{equation} \label{eq:pressure_cpa}
+P = \frac{RT}{v-b}-\frac{a}{v(v+b)}-\frac{1}{2}\frac{RT}{v} \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Big(\DIFaddend 1+\rho\frac{\partial \ln g}{\partial \rho}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Big)\DIFaddend \sum_{i} x_{i} \sum_{A_{i}}(1-X_{A_{i}})\DIFaddbegin \DIFadd{,
+}\DIFaddend \end{equation}
+    where $P$ is the pressure, $R$ is the ideal gas constant, $v$ is the molar volume, $b$ is the mixture co-volume parameter, $a$ is the mixture energy parameter, $T$ is the temperature, $x_{i}$ is the mole fraction of the $i$-th component, $A_{i}$ is the association site $A$ of the $i$-th component\DIFaddbegin \DIFadd{, }\DIFaddend and $X_{A_{i}}$ is the fraction of non-associated $A$ sites of the \DIFdelbegin \textit{\DIFdel{i}}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{$i$}\DIFaddend -th component. As the renormalization procedure calculates corrections explicitly to the Helmholtz free energy density, it is useful to represent the CPA equation of state in its Helmholtz-explicit form, given by
+\begin{subequations}
+\begin{equation} \label{eq:helm_res_cpa}
+\bar{a}_{CPA}^{res} =\bar{a}_{SRK}^{res} + \bar{a}_{assoc}^{res},
+\end{equation}
+where
+\begin{equation} \label{eq:helm_res_srk}
+\bar{a}_{SRK}^{res} = -RT\ln(1-\rho b)-\frac{a}{b}\ln(1+\rho b)   
+\end{equation}
+and
+\begin{equation} \label{eq:helm_res_assoc}
+\bar{a}_{assoc}^{res} = RT\sum_{i=1} x_{i} \sum_{A_{i}}\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Big(\DIFaddend \ln X_{A_{i}} - \frac{X_{A_{i}}}{2} + \frac{1}{2}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Big)\DIFaddend .
+\end{equation}
+\end{subequations}
+
+	In these equations, $\bar{a}$ is the molar Helmholtz free energy. The mixture parameters $a$ and $b$ are calculated using the van der Waals one-fluid mixing rule with the classical combining rules, that is,
+\begin{equation}
+    a = \sum_{i=1}^{nc} \sum_{j=1}^{nc} x_{i}x_{j}\sqrt{a_{i}a_{j}}(1-k_{ij})
+\end{equation}
+and
+\begin{equation}
+    b = \sum_{i=1}^{nc}x_{i}b_{i}\DIFaddbegin \DIFadd{,
+}\DIFaddend \end{equation}
+	where $k_{ij}$ is a binary interaction parameter (here considered as zero for all examples) and $nc$ is the number of components in the mixture. The energy parameter of each component $a_{i}$ is calculated using a Soave-type temperature dependency, which is \DIFaddbegin \pdfcomment{Em vez de usar 'big' para aumentar parênteses e colchetes, é melhor usar 'left' e 'right' para que o latex determine automaticamente o tamanho}
+\DIFaddend \begin{equation}
+a_{i}(T) = a_{0_{i}}\left[1+c_{1_{i}}\left(1-\sqrt{\frac{T}{T_{c_{i}}}}\right)\right]^2\DIFaddbegin \DIFadd{,
+}\DIFaddend \end{equation}
+	where $a_{0_{i}}$, $b_{i}$, $c_{1_{i}}$ are parameters of the CPA equation. The last term of Eq.~\ref{eq:pressure_cpa} \DIFaddbegin \pdfcomment{No latex, o til (~) representa um 'espaço não separável'... ele perde sua função se for precedido ou sucedido por um espaço} \DIFaddend is the association term, in which $X_{A_{i}}$ represents the fractions of non-associated $A$ sites of the \DIFdelbegin \textit{\DIFdel{i}}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{$i$}\DIFaddend -th component, and can be calculated by
+\begin{equation} \label{eq:frac_nb}
+    X_{A_{i}} = \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Big(\DIFaddend 1+\rho \sum_{j}x_{j} \sum_{B_{j}} X_{B_{j}} \Delta^{A_{i}B_{j}}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Big)\DIFaddend ^{-1}\DIFaddbegin \DIFadd{,
+}\DIFaddend \end{equation}
+    in which $\Delta^{A_{i}B_{j}}$ is the association strength, given by \DIFaddbegin \pdfcomment{existem comandos no latex para funções conhecidas, tais como exp, ln, sin, cos etc.}
+\DIFaddend \begin{equation} \label{eq:delta_cpa}
+    \Delta^{A_{i}B_{j}} = g(\rho)\DIFdelbegin %DIFDELCMD < \left[%%%
+\DIFdelend \DIFaddbegin \Big[\DIFaddend \exp\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \bigg(\DIFaddend \frac{\epsilon^{A_{i}B_{j}}}{RT}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \bigg)\DIFaddend -1\DIFdelbegin %DIFDELCMD < \right]%%%
+\DIFdelend \DIFaddbegin \Big]\DIFaddend b_{ij}\beta^{A_{i}B_{j}},
+\end{equation}
+with
+\begin{equation} \label{eq:bij}
+    b_{ij} = \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Big(\DIFaddend \frac{b_{i}+b{j}}{2}\DIFdelbegin %DIFDELCMD < \right)
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \Big)\DIFadd{,
+}\DIFaddend \end{equation}
+\begin{equation} \label{eq:g_cpa}
+    g(\rho) = \frac{1}{1-1.9\eta}, \quad \text{and}
+\end{equation}
+\begin{equation} \label{eq:eta_cpa}
+    \eta = \frac{b\rho}{4}\DIFaddbegin \DIFadd{,
+}\DIFaddend \end{equation}
+	where $\beta_{i}^{A_{i}B_{j}}$ and $\epsilon_{i}^{A_{i}B_{j}}$ are the association parameters of the CPA equation, $g(\rho)$ is the contact value of the radial distribution function\DIFaddbegin \DIFadd{, }\DIFaddend and $\eta$ is the packing fraction. The version of the CPA equation of state presented here is commonly referred to in the literature as the simplified-CPA (s-CPA) equation \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{kontogeorgis1999multicomponent}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{kontogeorgis1999multicomponent}}%DIFAUXCMD
+}\DIFaddend , but in this work we will simply use the \DIFdelbegin \DIFdel{term }\DIFdelend \DIFaddbegin \DIFadd{therm }\DIFaddend CPA for simplicity. In this work, $X_{A_{i}}$ is calculated following the numerical procedure proposed by Michelsen \textit{et al}. \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{michelsen2006robust}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{michelsen2006robust}}%DIFAUXCMD
+}\DIFaddend .
+
+	The recursive method developed by White and Zhang \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{white1993renormalization}}%DIFAUXCMD
+,~\mbox{%DIFAUXCMD
+\citep{white1995renormalization}}%DIFAUXCMD
+,~\mbox{%DIFAUXCMD
+\citep{white1998renormalization}}%DIFAUXCMD
+, }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{white1993renormalization, white1995renormalization, white1998renormalization} }%DIFAUXCMD
+}\DIFaddend and by Salvino and White \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{salvino1992calculation} }%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{salvino1992calculation} }%DIFAUXCMD
+}\DIFaddend introduces density fluctuations to \DIFdelbegin \DIFdel{a given framework }\DIFdelend \DIFaddbegin \hl{a given framework} \pdfcomment{Esse termo é meio vago.} \DIFaddend of Helmholtz energy density. The method is based on the Phase Space Cell Approximation method developed by Wilson \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{wilson1971renormalization}}%DIFAUXCMD
+,~\mbox{%DIFAUXCMD
+\citep{wilson1971brenormalization}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{wilson1971renormalization,  wilson1971brenormalization}}%DIFAUXCMD
+}\DIFaddend , where each iteration accounts for fluctuations of longer and longer wavelengths, thus \DIFdelbegin \DIFdel{, }\DIFdelend introducing a non-analytic correction to the analytical equation of state. An illustration of the method is represented in Fig.~\ref{fig:schematics}.
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{renorm_schematics.png}}
+\caption{Phase Space Cell Approximation schematics, first, interactions between molecules are calculated with a mean-field theory (a), then, fluctuations are included and neighbor molecules are considered to be a whole molecule (b), further iterations of the method are calculated (c)}
+\label{fig:schematics}
+\end{figure}
+
+	The renormalization group theory as introduced by White and Zhang \DIFdelbegin \DIFdel{~}\DIFdelend \cite{white1993renormalization} and further developed by Lue and Prausnitz \DIFdelbegin \DIFdel{~}\DIFdelend \cite{lue1998renormalization,lue1998brenormalization} is based on a transformation of the grand canonical partition function into a functional integral. Firstly, the interaction potential is considered to be divided into two main contributions, a reference term (related to short-range repulsions) and a perturbation term (related to long-range attractive interactions). Thus,
+\begin{equation} \label{eq:u(r)}
+    u(r) = u\DIFdelbegin \DIFdel{_\text{ref}}\DIFdelend \DIFaddbegin \DIFadd{_{ref}}\DIFaddend (r) + u\DIFdelbegin \DIFdel{_\text{pert}}\DIFdelend \DIFaddbegin \DIFadd{_{pert}}\DIFaddend (r)\DIFaddbegin \DIFadd{,
+}\DIFaddend \end{equation}
+    where $u(r)$ is the interaction potential, $u_{ref}(r)$ is the reference contribution, and $u_{pert}(r)$ is the perturbation contribution. Considering that the repulsive part of the potential accounts only for very short-wavelength fluctuations and that the perturbation part takes into account both short-wavelength and long-wavelength fluctuations contributions, the renormalization method is applied only to the attractive part of the potential. Mean-field theories are considered to provide a good approximation for the short-range repulsions, and fluctuations under a given cutoff length L. The following integral is responsible for accounting the short-wavelength fluctuations, and can be calculated with the mean-field theory
+	\DIFaddbegin 
+
+\DIFaddend \begin{equation} \label{eq:Fs}
+    F_{s}(\rho) = \int f^{EoS} dr
+\end{equation}
+\DIFdelbegin \DIFdel{where }\DIFdelend \DIFaddbegin 
+
+    \DIFadd{Where }\DIFaddend $f^{EoS}$ is the Helmholtz free energy density calculated using the mean-field theory (in this work, the CPA equation of state)
+\DIFaddbegin 
+
+\DIFaddend \begin{equation} \label{eq:f_to_a}
+    f^{EoS} = \frac{\bar{a}^{EoS}}{v}
+\end{equation}
+
+    As we are concerned only with the attractive part, to apply the renormalization method, we need to subtract the attractive potential already included in the mean-field solution, considering it to be a bad approximation, since the mean-field theory cannot deal accurately with long-wavelength fluctuations, leading to the following approximation
+    \DIFaddbegin 
+
+\DIFaddend \begin{equation} \label{eq:f01}
+    f_{0}(\rho) = f^{EoS} + \alpha\rho^2
+\end{equation}
+    \DIFdelbegin \DIFdel{where }\DIFdelend \DIFaddbegin 
+
+    \DIFadd{Where }\DIFaddend $\alpha$ is the interaction volume. Considering previous works with the SRK and CPA equations of state \DIFdelbegin \DIFdel{~}\DIFdelend \cite{cai2004thermodynamics,pcm2017application,xu2010crossover}, the attractive part was approximated to
+\DIFaddbegin 
+
+\DIFaddend \begin{equation} \label{eq:arho2}
+    \alpha\rho^2 = 0.5a\rho^2
+\end{equation}
+
+    The Helmholtz free energy corresponding to the zero-order solution ($f_{0}$) is given by the mean-field theory. Combining equations ~\ref{eq:helm_res_cpa},~\ref{eq:f_to_a},~\ref{eq:f01}, and ~\ref{eq:arho2}, the Helmholtz free energy density zero-order solution is
+\DIFaddbegin 
+
+\DIFaddend \begin{equation} \label{eq:f00}
+f_{0}(\rho) = \rho RTln(\frac{\rho}{1-\rho b})-\frac{a\rho}{b}ln(1+\rho b) + \rho RT\sum_{i=1} x_{i} \sum_{A_{i}}\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Big(\DIFaddend lnX_{A_{i}} - \frac{X_{A_{i}}}{2} + \frac{1}{2}\DIFdelbegin %DIFDELCMD < \right) %%%
+\DIFdelend \DIFaddbegin \Big) \DIFaddend + 0.5a\rho^2
+\end{equation}  
+
+	The Phase Space Cell Approximation method consists on adding the influence of long-range fluctuations through recursive steps, thus correcting the influence over the Helmholtz free energy density. In this work, the equations derived from the above procedures and used to calculate these corrections are as follows
+	\DIFaddbegin 
+
+\DIFaddend \begin{equation} \label{eq:fn}
+    f_{n}(\rho) = df_{n}(\rho) + f_{n-1}(\rho)
+\end{equation}
+\DIFdelbegin \DIFdel{where }\DIFdelend \DIFaddbegin 
+
+    \DIFadd{Where }\DIFaddend $df_{n}(\rho)$ is the change in Helmholtz free energy density.
+
+\begin{equation} \label{eq:dfn}
+    df_{n}(\rho) = -K_{n} ln\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\Omega_{n}^{s}(\rho)}{\Omega_{n}^{l}(\rho)}\DIFdelbegin %DIFDELCMD < \right)
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \Bigg)
+\DIFaddend \end{equation}
+\DIFdelbegin \DIFdel{where }\DIFdelend \DIFaddbegin 
+
+    \DIFadd{Where }\DIFaddend $\Omega_{n}^{s}$ is the density of short-wavelengths fluctuations and $\Omega_{n}^{l}$ is the density of long-wavelengths fluctuations. The $K_{n}$ coefficient is calculated from
+\DIFaddbegin 
+
+\DIFaddend \begin{equation} \label{eq:Kn}
+    K_{n} = \frac{k_{b}T}{(2^{n}L)^3}
+\end{equation}
+\DIFdelbegin \DIFdel{where }\DIFdelend \DIFaddbegin 
+
+    \DIFadd{Where }\DIFaddend $k_{b}$ is the Boltzmann constant and $L$ is the cutoff length. The density of fluctuations can be calculated from
+    \DIFaddbegin 
+
+\DIFaddend \begin{equation} \label{eq:Omega}
+    \Omega_{n}^{\gamma} = \int_{0}^{min(\rho,\rho_{max}-\rho)}exp\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend -\frac{G_{n}^{\gamma}(\rho,x)}{K_{n}}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend dx \ \ \ \ \ \   \gamma = s,l
+\end{equation}
+
+\begin{equation} \label{eq:Gn}
+    G_{n}^{\gamma}(\rho) = \frac{f_{n}^{\gamma}(\rho+x)-2f_{n}^{\gamma}(\rho)+f_{n}^{\gamma}(\rho-x)}{2} \ \ \ \ \ \   \gamma = s,l
+\end{equation}
+\DIFdelbegin \DIFdel{where }\DIFdelend \DIFaddbegin 
+
+    \DIFadd{Where }\DIFaddend $f_{n}^{s}$ and $f_{n}^{l}$ are modified Helmholtz free energy terms, related to \DIFdelbegin \DIFdel{short-wavelength fluctuations }\DIFdelend \DIFaddbegin \DIFadd{short- }\DIFaddend and long-wavelength fluctuations\DIFaddbegin \DIFadd{, }\DIFaddend respectively.
+
+\begin{equation} \label{eq:fns}
+    f_{n}^{s} = f_{n-1} + \frac{\alpha \rho^2 \phi}{2^{2n}}
+\end{equation}
+
+\begin{equation} \label{eq:fnl}
+    f_{n}^{l} = f_{n-1} + \alpha\rho^2
+\end{equation}
+
+    The final Helmholtz free energy density is calculated from
+
+\begin{equation} \label{eq:ff}
+    f = \lim_{n\rightarrow \inf} f_{n} 
+\end{equation}
+
+    Here we considered $f_{5}$ to be the final Helmholtz free energy density. To apply the renormalization procedure to mixtures, two major approximations were used. First, the isomorphic approximation \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{fisher1968renormalization} }%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{fisher1968renormalization} }%DIFAUXCMD
+}\DIFaddend was used instead of the Phase Space Cell Approximation. The main difference between the two approximations is that the isomorphic approximation considers that the total density of the fluid is used to consider fluctuations, whilst the Phase Space Cell Approximation implies that each individual component in the mixture fluctuates independently. Second, as the isomorphism assumption requires that the chemical potential be the isomorphic variable in the present case, which is not a common independent variable for mixture phase equilibria modelling, following Kiselev and Friend \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{kiselev1999cubic}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{kiselev1999cubic}}%DIFAUXCMD
+}\DIFaddend , we used mole fractions as isomorphic variables instead of the individual chemical potentials. These two approximations make possible to extend equations ~\cref{eq:f00,eq:fn,eq:dfn,eq:Kn,eq:Omega,eq:Gn,eq:fns,eq:fnl} with the need of only mixing rules (~\cref{eq:mix_L,eq:mix_phi}) for the renormalization parameters
+    \DIFaddbegin 
+
+\DIFaddend \begin{equation} \label{eq:mix_L}
+    L = \sum_{i=1}^{nc}x_{i}L_{i}^{3}
+\end{equation}
+
+\begin{equation} \label{eq:mix_phi}
+    \phi = \sum_{i=1}^{nc}x_{i}\phi_{i}
+\end{equation}
+
+    These approximations were used by other authors with good results \DIFdelbegin \DIFdel{~}\DIFdelend \cite{cai2004thermodynamics,llovell2006global,sun2005application,pcm2017application,xu2011prediction}. Tang and Gross  \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{tang2010renormalization} }%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{tang2010renormalization} }%DIFAUXCMD
+}\DIFaddend compared the Phase Space Cell Approximation and Isomorphic Approximation using the PC-SAFT equation of state, and concluded that the phase-space cell approximation present similar performance to the isomorphic approximation. 
+
+    The substances analyzed here are: n-butane, n-octane, methanol, ethanol, \ce{CO_2}, and \DIFdelbegin \DIFdel{\ce{H_{2}S}}\DIFdelend \DIFaddbegin \DIFadd{\ce{H_2S}}\DIFaddend . These substances were chosen because of the different associative combinations that could be evaluated. n-Butane and \ce{CO_2} were considered non-associative substances, while methanol, ethanol, and \DIFdelbegin \DIFdel{\ce{H_{2}S} }\DIFdelend \DIFaddbegin \DIFadd{\ce{H_2S} }\DIFaddend are considered associative substances. There is a large discussion on the literature on the most adequate associating models \textbf{and considerations} to represent these substances, mainly \ce{CO_2}  \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{bjorner2016modeling} }%DIFAUXCMD
+and \ce{H_{2}S} ~\mbox{%DIFAUXCMD
+\citep{ruffine2006represent}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{bjorner2016modeling} }%DIFAUXCMD
+and \ce{H_2S}  \mbox{%DIFAUXCMD
+\cite{ruffine2006represent}}%DIFAUXCMD
+}\DIFaddend . A common example is whether \ce{CO_2} should or not be considered an associating molecule and further, whether the extent of quadrupole forces inclusion is important \DIFdelbegin \DIFdel{~}\DIFdelend \cite{tsivintzelis2011modeling,bjorner2016modeling}.
+
+	The parameters for each substance are summarized in Table ~\ref{table:CPA_parameters}. For all cases, the CR-1 combination rule is considered to combine association parameters. In cases where both substances are associating, cross-association is considered. The critical properties for each substance are shown in Table ~\ref{table:crit_exp}
+
+\begin{table}[h!]
+\centering
+\caption{CPA Parameters used in this work}
+\label{table:CPA_parameters}
+\makebox[\textwidth]{\begin{tabular}{lllllll}
+                                                                                                              \hline
+Substance   & Association Model & $a_{0_{i}}$ ($Pa.m^{6}.mol$) & $b_{i}$ ($10^{5}\times m^{3}.mol^{-1}$) & $c_{1_{i}}$      & $\epsilon_{i}^{A_{i}B_{j}}$ ($MPa.m^{3}.mol^{-1}$) & $\beta_{i}^{A_{i}B_{j}}$  \\ \hline
+n-Butane    & n.a.              & 1.29            & 7.21         & 0.70771 & -                    & -      \\
+Methanol    & 2B                & 0.405           & 3.098        & 0.43102 & 0.024591             & 0.0161 \\
+Ethanol     & 2B                & 0.867           & 4.911        & 0.7369  & 0.021532             & 0.008  \\
+\ce{CO_2}         & n.a.              & 0.351           & 2.72         & 0.7602  & -                    & -      \\
+\DIFdelbeginFL \DIFdelFL{\ce{H_{2}S}         }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\ce{H_2S}         }\DIFaddendFL & 4C                & 0.32            & 2.93         & 0.82805 & 0.00146              & 0.486  \\ \hline     
+\end{tabular}}
+\raggedright n.a. = non-associative
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Experimental critical data obtained from NIST database \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{nistfluids} and used as reference}
+\label{table:crit_exp}
+\makebox[\textwidth]{\begin{tabular}{llll}
+                                                   \hline
+Substance   & $T_{c} (K)$ & $P_{c} (MPa)$ & $\rho_{c} (mol/m^{3})$  \\ \hline
+n-Butane    & 425.2  & 3.797    & 3920          \\
+Methanol    & 512.6  & 8.096    & 8510          \\
+Ethanol     & 514.0  & 6.384    & 6000          \\
+\ce{CO_2}         & 304.2  & 7.382    & 10600         \\
+\DIFdelbeginFL \DIFdelFL{\ce{H_{2}S}         }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\ce{H_2S}         }\DIFaddendFL & 373.4  & 8.960    & 10200         \\ \hline     
+\end{tabular}}
+\end{table}
+
+    Posterior to the estimation of parameters $\phi$ (eq.~\ref{eq:fns}) and L (eq.~\ref{eq:Kn}) and calculation of the vapor-liquid equilibria phase envelope, the critical exponent $\beta$ was evaluated using a linear regression curve calculated from eq ~\ref{eq:beta_law}
+
+\begin{equation} \label{eq:beta_law}
+    ln\Bigg|\frac{\rho_{liq}-\rho_{vap}}{\rho_{c}}\Bigg| = \beta ln\Bigg|\frac{T-T_{c}}{T_{c}}\Bigg|+cte \ \ \ \ \ (T \rightarrow T_{c})
+\end{equation}
+
+\section{Numerical Procedures}
+    From an initial grid of density (and mole fractions, in the case of mixtures), the Helmholtz free energy density is calculated to all points in the grid. Further, equations~\cref{eq:f00,eq:fn,eq:dfn,eq:Kn,eq:Omega,eq:Gn,eq:fns,eq:fnl} are applied considering the given points of the grid. Iterations are calculated until no further change is observed to the free energy in every point of the grid ($df_{n}(\rho) \cong$ 0 condition). Here, 5 iteration steps are considered enough to reach convergence in a grid of 500 density points. The number of points (500) in the grid is enough for all calculations presented here. Other authors considered even less grid density points (400, and even 200) \DIFdelbegin \DIFdel{~}\DIFdelend \cite{cai2004thermodynamics}. These numbers of steps and grid points were tested in preliminary studies (see Figures~\ref{fig:dfn} and~\ref{fig:PV_evol}).
+
+    The renormalized grid of Helmholtz energy density was interpolated using cubic splines (or bicubic spline in the case of binary mixtures) and the derivatives of this grid were used to calculate variables of interest of vapor-liquid phase equilibria, as chemical potential and pressure. Details of equations and algorithms are given in Appendices A and B.
+
+    As mentioned in the previous section, for mixtures, the considered density to calculate fluctuations is the total molar density of the mixture (the isomorphism assumption) and mole fractions are used as independent variables.
+
+    Upon analyzing and determining the parameters related to the renormalization method for pure substances, phase equilibria calculations for binary mixtures were made in a sort of different conditions (both subcritical and critical), using the isofugacity method.
+
+\section{Parameter Estimation}
+    Both parameters related to the renormalization were considered to be adjustable. Therefore, both parameters were obtained by fitting densities and vapor pressures to experimental data using a single objective function, given as
+
+\begin{equation}   \label{eq:OF}
+O.F.=\sum_{i=1}^{n_{exp}} \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\rho_{i}^{liq,exp}-\rho_{i}^{liq,calc}}{\rho_{i}^{liq,exp}}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend ^2 + \sum_{i=1}^{n_{exp}} \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\rho_{i}^{vap,exp}-\rho_{i}^{vap,calc}}{\rho_{i}^{vap,exp}}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend ^2 + \sum_{i=1}^{n_{exp}} \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{P_{i}^{sat,exp}-P_{i}^{sat,calc}}{P_{i}^{sat,exp}}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend ^2
+\end{equation}
+
+    Saturation pressure, saturated vapor density and saturated liquid density were used in the temperature range from near-critical to the critical point (Tr=0.98 to Tr=1.0, including the critical point). Both liquid and vapor densities were included to assure that the fitted parameters would obey the critical exponent $\beta$ given by eq.~\ref{eq:beta_law}. A Particle Swarm Optimization algorithm was used to find the minimum of the objective function, fitting both parameters at the same time. The parameters obtained are summarized in Table ~\ref{table:renorm_param}.
+
+\begin{table}[ht!]
+\centering
+\caption{Estimated Parameters for the renormalization method}
+\label{table:renorm_param}
+\makebox[\textwidth]{\begin{tabular}{lll}
+                                                   \hline
+Substance   & L($\AA$) & $\phi$           \\ \hline
+n-Butane    & 4.85  & 3.40          \\
+Methanol    & 5.45  & 0.75          \\
+Ethanol     & 5.48  & 0.75          \\
+\ce{CO_2}         & 4.44  & 2.62         \\
+\DIFdelbeginFL \DIFdelFL{\ce{H_{2}S}         }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\ce{H_2S}         }\DIFaddendFL & 4.30  & 2.40         \\ \hline     
+\end{tabular}}
+\end{table}
+
+	We observed that the parameters $L$ and $\phi$ present a strong correlation, that mean several combinations of them give similar results. A good review on this subject can be found in Bymaster et al. \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\citep{bymaster2008renormalization}}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{bymaster2008renormalization}}%DIFAUXCMD
+}\DIFaddend . The relation is explicit from the derivation of equation~\ref{eq:fns}, following Battle \DIFdelbegin \DIFdel{~}\DIFdelend \cite{battlerenorm}, the $\phi$ parameter comes from
+
+\begin{equation} \label{eq:fns_battle}
+    \phi = \frac{\psi w^2}{2L^2}
+\end{equation}
+
+    Where $\psi$ is related to the initial shortest wavelength of the density fluctuations and $w$ is the range of the attractive potential. From~\ref{eq:fns_battle} it is clear that $\phi$ should correspond to some multiple of $L$.
+
+\section{Pure Substances Phase Equilibria Results}
+
+	To define the necessary number of iterations, we analyzed the evolution of pure substance vapor-liquid phase envelope and the $df_{n}$ for the whole density range. From Figures~\ref{fig:dfn} and~\ref{fig:PV_evol}, it is clear that the method converges in four to five iterations. To be conservative, following other authors  \DIFdelbegin \DIFdel{~}\DIFdelend \cite{llovell2004thermodynamic,cai2004thermodynamics,pcm2017application}, the final Helmholtz free energy density is $f_{5}$.
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{df_csv.png}}
+\caption{Helmholtz-free energy density correction in each iteration of the renormalization method. Using the CPA+RG equation of state for Methanol at 512.6K}
+\label{fig:dfn}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{PV_evol.png}}
+\caption{vapor-liquid phase equilibria envelope for methanol with CPA+RG with different iteration levels}
+\label{fig:PV_evol}
+\end{figure}
+
+    Results concerning phase equilibria calculations are summarized in Figures ~\ref{fig:pure_LV}, ~\ref{fig:sat_p}, ~\ref{fig:crit_exp}, ~\ref{fig:pure_isotherm} and Table ~\ref{table:AAD_crit}.
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{PV_pure_4.png}}
+\caption{vapor-liquid phase envelope. Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline). Experimental Data extracted from NIST database \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{nistfluids} ($\square$)}
+\label{fig:pure_LV}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{sat_p.png}}
+\caption{Saturation pressure curves. Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline). Experimental Data extracted from NIST database \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{nistfluids} ($\square$)}, critical points are represented by filled symbols.
+\label{fig:sat_p}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{beta.png}}
+\caption{Critical Exponent beta calculation for methanol, $\beta$=0.33 for CPA+RG and $\beta$=0.49 for CPA. Symbols are calculated from CPA+RG ($\circ$). CPA ($\square$). Lines are first-order regression curves (\dashedline). The value of $\beta$ obtained from CPA+RG is very close to experimental data.}
+\label{fig:crit_exp}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{isotherm.png}}
+\caption{Isotherms for Methanol at Tr=1.0 (below) and Tr=1.1 (above). Experimental data from NIST database \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{nistfluids} ($\square$). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
+\label{fig:pure_isotherm}
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\caption{Critical point absolute relative deviation (\%)}
+\label{table:AAD_crit}
+\begin{tabular}{cccccccl} \hline
+\multirow{2}{*}{Substance} & \multicolumn{2}{c}{$\displaystyle \bigg|\frac{T_{c}-T_{c}^{exp}}{T_{c}^{exp}}\bigg|$} & \multicolumn{2}{c}{$\displaystyle \bigg|\frac{P_{c}-P_{c}^{exp}}{P_{c}^{exp}}\bigg|$} & \multicolumn{2}{c}{$\displaystyle \bigg|\frac{\rho_{c}-\rho_{c}^{exp}}{\rho_{c}^{exp}}\bigg|$} &  \\ \cline{2-7}
+                           & CPA                & CPA+RG              & CPA               & CPA+RG            & CPA                 & CPA+RG               &  \\ \hline
+n-Butane                   & 1.49               & 0.85                & 13.54             & 6.32              & 8.01                & 7.14                 &  \\
+Methanol                   & 4.49               & 0.26                & 32.68             & 0.54              & 5.17                & 0.43                 &  \\
+Ethanol                    & 4.77               & 0.2                 & 29.79             & 1.02              & 7.52                & 1.39                 &  \\
+\ce{CO_2}                       & 1.91               & 0.53                & 11.25             & 3.79              & 9.82                & 3.75                 &  \\
+\DIFdelbeginFL \DIFdelFL{\ce{H_{2}S}                        }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\ce{H_2S}                        }\DIFaddendFL & 3.21               & 0.13                & 19.79             & 6                 & 2.96                & 1.86                 &  \\ \hline
+\end{tabular}
+\end{table}
+
+    Figure ~\ref{fig:crit_exp} shows that the CPA+RG presents correct critical exponent $\beta$=0.33, very close to the universal experimental value, while the CPA equation of state presents a classical mean-field value, $\beta \sim$0.5.
+
+    It is clear from Figures ~\ref{fig:pure_LV} and ~\ref{fig:sat_p} that the correction of the behavior of the fluid in the phase envelope when the conditions are near the critical region, leading to an asymptotic behavior at the critical point. As conditions become farther away from the critical point, the differences between the CPA equation of state and the CPA+RG become insignificant. This result is expected due the fact that long-wavelength fluctuations at this point are less important, and then the renormalization method does not imply any changes into the Helmholtz energy. 
+
+    Figure~\ref{fig:pure_isotherm} shows the change in phase equilibria modelling at critical and supercritical isotherms. The CPA+RG approach is able to better predict the fluids phase behavior, because the CPA equation of state overpredicts the critical point, it describes a binary vapor-liquid phase up to its erroneous critical point, while the CPA+RG approach already describes the fluid as supercritical. The changes in free energy for supercritical isotherm are lesser than those for critical isotherm. In Figures~\ref{fig:sat_p} it is clear that the renormalization method has a tendency to overestimate pressure.
+
+    Table ~\ref{table:AAD_crit} shows that the errors from CPA+RG approach are smaller than the CPA equation of state, which overestimates the critical point.
+
+\section{Binary Mixture Phase Equilibria Results}
+
+    In all binary mixtures, we evaluated both subcritical and critical conditions for three kinds of mixture: 2 non-associating components (\ce{CO_2} + n-butane); 1 associating and 1 non-associating component (\DIFdelbegin \DIFdel{\ce{H_{2}S} }\DIFdelend \DIFaddbegin \DIFadd{\ce{H_2S} }\DIFaddend + \ce{CO_2}); 2 associating components (\DIFdelbegin \DIFdel{\ce{H_{2}S} }\DIFdelend \DIFaddbegin \DIFadd{\ce{H_2S} }\DIFaddend + Methanol). In all cases the CR-1 combining rule is used. Solvating phenomena is not considered for the case of \DIFdelbegin \DIFdel{\ce{H_{2}S} }\DIFdelend \DIFaddbegin \DIFadd{\ce{H_2S} }\DIFaddend + \ce{CO_2}.
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.75\textwidth]{bin_co2_c4.png}}
+\caption{vapor-liquid Phase Equilibria Envelope to the mixture \ce{CO_2} + n-butane in the temperatures of 260K (below) and 344.3K (above). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline). Experimental data extracted from Clark et al. \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{clark1988vapour+} ($\circ$) and Hsu et al. \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{hsu1985equilibrium} ($\square$)}
+\label{fig:bin_co2_but}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.75\textwidth]{bin_h2s_meth.png}}
+\caption{vapor-liquid equilibria phase envelope for \DIFdelbeginFL \DIFdelFL{\ce{H_{2}S} }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\ce{H_2S} }\DIFaddendFL + Methanol mixture in temperatures 298.15K (below) and 448.15K (above). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline). Squares Experimental data extracted from Leu et al.  \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{leu1992equilibrium} ($\square$,$\circ$)}
+\label{fig:bin_h2s_meth}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.75\textwidth]{bin_h2s_co2.png}}
+\caption{vapor-liquid equilibria phase envelope for \DIFdelbeginFL \DIFdelFL{\ce{H_{2}S} }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\ce{H_2S} }\DIFaddendFL + \ce{CO_2} mixture in temperatures 273.15K (below) and 313.15K (above). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline). Experimental data extracted from Bierlein et al.  \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{bierlein1953phase} ($\square$,$\circ$)}
+\label{fig:bin_h2s_co2}
+\end{figure}
+
+    Figures ~\ref{fig:bin_co2_but},~\ref{fig:bin_h2s_meth} and~\ref{fig:bin_h2s_co2} show that the renormalization method has significative influence only in the behavior of the equations of state in critical/supercritical conditions. On correcting the fluids behavior at these conditions, the phase equiibria representation was improved, for both dew and bubble curves. For all evaluated mixtures the results were similar, With them, it is clear that CPA+RG approach improves the CPA equation of state behavior for binary mixtures phase equilibria modelling. Apparently, the difference of being an associative or non-associative component in the mixture is not an important factor for the overall result of the renormalization method.
+
+\section{Derivative Properties for Pure Substances}
+
+	To assess the impact of the renormalization method on derivative properties, we calculated the isochoric heat capacity, isobaric heat capacity and speed of sound of methanol under different conditions, first as at the compressed liquid region at near-critical state, second at the critical isotherm, and finally at supercritical isotherms. Details on the calculations are given in the Appendix C.
+
+	In the compressed liquid region, Figure~\ref{fig:cv_cp_compressed} shows that the renormalization method had no major effect on both temperatures, there is a clear tendency of increasing both heat capacities, which is better captured at lower pressures. This effect only increases very slightly the inclination of the heat capacities curves at lower pressures. As expected, in conditions far away from the critical point, the change is very small.
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{cv_cp_compressed.png}}
+\caption{Isochoric and isobaric residual heat capacity for methanol at subcritical conditions in the compressed liquid region, symbols are experimental data from NIST database \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{nistfluids} at Tr=0.8 ($\square$) and Tr=0.9 ($\circ$). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
+\label{fig:cv_cp_compressed}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{u_compressed.png}}
+\caption{Speed of sound for methanol at subcritical conditions in the compressed liquid region, symbols are experimental data from NIST database at Tr=0.8 ($\square$) and Tr=0.9 ($\circ$). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
+\label{fig:u_compressed}
+\end{figure}
+
+	Results of speed of sound at the compressed liquid region, shown in Figure~\ref{fig:u_compressed}, shows that upon applying the renormalization method the speed of sound is very slightly decreased. It is though, advisable to use parameters that overestimate the speed of sound.
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{cv_cp_critical.png}}
+\caption{Isochoric and isobaric residual heat capacity for methanol at the critical isotherm (512.6K). Experimental data from NIST database \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{nistfluids} ($\square$). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
+\label{fig:cv_cp_critical}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{u_critical.png}}
+\caption{Speed of sound for methanol at the critical isotherm (512.6K). Experimental data from NIST database \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{nistfluids} ($\square$). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
+\label{fig:u_critical}
+\end{figure}
+
+	At the critical temperature, both isochoric and isobaric heat capacity predictions (Figure~\ref{fig:cv_cp_critical}) are improved with the renormalization method. The changes are more noticiable in the behavior of the curves, since the CPA equation of state is still predicting a binary phase equilibria, while the CPA+RG approach is already predicting this condition as a near-critical/critical state. A remarkable feature is that the renormalization method is capable of capturing the experimental critical divergence of the isobaric heat capacity, as shown in Figure~\ref{fig:cv_cp_critical}. 
+
+	In the case of the speed of sound, there is a shift at the minimum of the curve when applying the renormaliation method, both in pressure and speed of sound, leaning it very near to the experimental minimum. The prediction is better at the vicinity of this minimum, however, at higher pressures, the CPA equation of state approaches the experimental values, while the CPA+RG underestimates the experiment data. Very peculiar results concerning the speed of sound opens a discussion on whether using speed of sound near-critical data to estimate the renormalization parameters would improve the modelling of phase equilibria.
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{cv_cp_supercrit.png}}
+\caption{Isochoric and isobaric residual heat capacity for methanol at supercritical isotherms, symbols are experimental data from NIST database \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{nistfluids} at Tr=1.1 ($\circ$) and Tr=1.2 ($\square$). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
+\label{fig:cv_cp_supercritical}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\captionsetup{justification=centering}
+ \makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{u_supercritical.png}}
+\caption{Speed of sound for methanol at supercritical isotherms, symbols are experimental data from NIST database \DIFdelbeginFL \DIFdelFL{~}\DIFdelendFL \cite{nistfluids} at Tr=1.1 ($\circ$) and Tr=1.2 ($\square$). Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
+\label{fig:u_supercritical}
+\end{figure}
+
+	In the supercritical region, contrary to the compressed liquid region, the isobaric heat capacity has a tendency of being underestimated when the renormalization method is applied, while the isochoric heat capacity is still overestimated. For the speed of sound results, it is clear that using the renormalization method overestimated the speed of sound near the minimum of the curve, in pressures above this point, the speed of sound was underestimated.
+
+\section{Conclusion}
+
+    The applied methodology of renormalization group theory is capable of improving the modelling of phase equilibria in conditions near-to and at the critical point without impairing the description given by the equation of state far away from this condition. In all cases the model behavior is improved when compared to experimental data, correcting critical exponents and introducing the expected asymptotic behavior to the fluid near the critical point. A great advantage of the implemented method is that binary mixtures calculations do not represent computationally cumbersome tasks. One of the major drawbacks of the method, however, is the introduction of two extra parameters.
+
+    Considering the parameter estimation, only the renormalization parameters do not guarantee improvements on the representation of $C_{p}$ and $c_{sound}$. To model both thermodynamic properties and phase equilibria using equations of state in conditions near-to the critical point, it may be necessary to do a parameter estimation using data from both, or even re-estimate the equation of state parameters using only data far away from the critical point. The authors faced some problems with the used parameter estimation method, a more robust algorithm than PSO is indicated.
+
+	These results suggest that the used renormalization group methodology, together with the CPA equation of state, is a better tool than the sole CPA equation of state to describe pure acid gases and its binary mixtures phase equilibria and derivative properties in a large range of conditions, from subcritical conditions, up to supercritical ones.
+
+\section{Acknowledgments}
+	The authors would like to thank Prof. Leo Lue for his invaluable help in providing a code to use the renormalization group method within the MSA approach, and thus allowing us to compare resuts and validate our renormalization code. We thanks Capes, CNPQ and Petrobras for financial support.
+
+%Making Nomenclature---------------------------------------------------
+  \ifstrequal{#1}{A}{Abbreviations}{%
+
+  \ifstrequal{#1}{R}{Roman Letters}{%
+
+  \ifstrequal{#1}{G}{Greek Letters}{%
+
+  \ifstrequal{#1}{S}{Super/subscripts}{%
+
+  \ifstrequal{#1}{L}{List of Symbols}{}}}}}%
+
+\nomenclature[A]{SRK}{Soave-Redlich-Kwong}
+\nomenclature[A]{EoS}{Equation of State}
+\nomenclature[A]{CPA}{Cubic-Plus-Association}
+\nomenclature[A]{NIST}{National Institute of Standards and Technology}
+\nomenclature[A]{RG}{Renormalization Group}
+\nomenclature[A]{VLE}{Vapor-Liquid Equilibria}
+\nomenclature[A]{SAFT}{Statistical Associating Fluid Theory}
+\nomenclature[A]{PSO}{Particle Swarm Optimization}
+\nomenclature[A]{ }{  }
+
+\nomenclature[R]{$a$}{mixture energy parameter of equation of state}
+\nomenclature[R]{$b$}{mixture co-volume parameter of equation of state}
+\nomenclature[R]{$f$}{Helmholtz free energy density}
+\nomenclature[R]{$\bar{a}$}{molar Helmholtz free energy}
+\nomenclature[R]{$k_{ij}$}{binary interaction parameter}
+\nomenclature[R]{$K$}{renormalization method coefficient}
+\nomenclature[R]{$k_{b}$}{boltzmann constant}
+\nomenclature[R]{$C_{v}$}{isochoric heat capacity}
+\nomenclature[R]{$C_{p}$}{isobaric heat capacity}
+\nomenclature[R]{$M_{w}$}{molecular weight}
+\nomenclature[R]{$L$}{cutoff length}
+\nomenclature[R]{$n$}{mole number}
+\nomenclature[R]{$c_{sound}$}{speed of sound}
+\nomenclature[R]{$v$}{molar volume}
+\nomenclature[R]{$\textbf{n}$}{mole number}
+\nomenclature[R]{$g$}{radial distribution function}
+\nomenclature[R]{$X_{A_{i}}$}{fraction of non-bonded A site of the \textit{i}th component}
+\nomenclature[R]{$u$}{pair potential}
+\nomenclature[R]{$x$}{mole fraction}
+\nomenclature[R]{$P$}{pressure}
+\nomenclature[R]{$r$}{distance between particles}
+\nomenclature[R]{$R$}{ideal gas constant}
+\nomenclature[R]{$T$}{temperature}
+\nomenclature[R]{$nc$}{number of components}
+\nomenclature[R]{$n_{exp}$}{number of exponents}
+\nomenclature[R]{ }{ }
+
+\nomenclature[G]{$\epsilon^{A_{i}B_{j}}$}{association energy}
+\nomenclature[G]{$\Delta^{A_{i}B_{j}}$}{association strength}
+\nomenclature[G]{$\beta^{A_{i}B_{j}}$}{association volume}
+\nomenclature[G]{$\beta$}{critical exponent}
+\nomenclature[G]{$\alpha$}{interaction volume}
+\nomenclature[G]{$\eta$}{packing fraction}
+\nomenclature[G]{$\rho$}{molar density}
+\nomenclature[G]{$\mu$}{chemical potential}
+\nomenclature[G]{$\psi$}{initial shortest wavelength}
+\nomenclature[G]{$\phi$}{renormalization parameter related to the initial shortest wavelength}
+\nomenclature[G]{$\Omega$}{density of fluctuations}
+\nomenclature[G]{ }{ }
+
+\nomenclature[S]{pert}{perturbation}
+\nomenclature[S]{ref}{reference}
+\nomenclature[S]{res}{residual property}
+\nomenclature[S]{assoc}{association contribution}
+\nomenclature[S]{ig}{ideal gas}
+\nomenclature[S]{c}{critical property}
+\nomenclature[S]{0}{zero-order solution}
+\nomenclature[S]{n}{\textit{n}th iteration}
+\nomenclature[S]{l}{long-range}
+\nomenclature[S]{liq}{liquid}
+\nomenclature[S]{vap}{vapor}
+\nomenclature[S]{s}{short-range}
+\nomenclature[S]{exp}{experimental}
+\nomenclature[S]{calc}{calculated}
+\nomenclature[S]{sat}{saturated}
+\nomenclature[S]{i,j}{\textit{i}th, \textit{j}th component}
+\nomenclature[S]{ }{ }
+
+\nomenclature[L]{}{}
+\nomenclature[L]{}{}
+\nomenclature[L]{}{}
+\nomenclature[L]{}{}
+\nomenclature[L]{}{}
+\printnomenclature[5em]
+%End Nomenclature------------------------------------------------------
+
+\begin{appendices}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\setcounter{equation}{0}
+\section{Equations and Algorithm for Phase Equilibria Calculations for Pure Substances}
+
+	After the renormalization method is applied for a given grid of density, we are left with a piece-wise curve of Helmholtz energy density. To make phase equilibria calculations with this curve, we need to apply cubic splines interpolations to make phase equilibria calculations. It is advisable to use adimensional variables, which can be computed from its dimensional versions using the following equations (variables marked with * are adimensional)
+
+\begin{equation} \label{eq:adim_dens}
+	\rho^{*} = \rho b
+\end{equation}	
+
+\begin{equation} \label{eq:adim_T}
+	T^{*} = \frac{TRb}{a}
+\end{equation}	
+
+\begin{equation} \label{eq:adim_f}
+	f^{*} = \frac{fb^{2}}{a}
+\end{equation}
+
+	All derivatives can be approximated using the finite difference method, using five-point stencils for central difference. A simple algorithm to calculate the liquid and vapor saturation densities is devised as follows:
+
+	(1) Using the equation of state, calculate the maximum liquid density ($\rho_{l,max}$) at a given temperature, with
+
+\begin{equation} \label{eq:max_dens}
+	\rho^{l,max} = \frac{0.99999}{b}
+\end{equation}
+
+	The 0.99999 instead of 1.00000 is used to avoid unwished infinites.
+
+	(2) From 0 to $\rho_{l,max}$, set equally-spaced points of density (in this work we recommend using 500 points), and for each point, use the equation of state to calculate the Helmholtz free energy density
+
+	(3) For each density point in the grid, apply equations ~\cref{eq:f00,eq:fn,eq:dfn,eq:Kn,eq:Omega,eq:Gn,eq:fns,eq:fnl} for the desired number of iterations (in this work we recommend calculating 5 iterations).
+
+	(4) With the renormalization Helmholtz free energy density grid, calculate the chemical potential and pressure curves using Equations ~\ref{eq:press} and ~\ref{eq:chem_pot}
+
+\begin{equation} \label{eq:press}
+    P = -f+\rho u
+\end{equation}
+
+\begin{equation} \label{eq:chem_pot}
+    u = \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Big(\DIFaddend \frac{\partial f}{\partial \rho}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Big)\DIFaddend _{T,\textbf{n}}
+\end{equation}
+
+	(5) Give liquid and vapor densities initial guesses and solve for the equilibrium conditions (equal pressure and chemical potential in both phases), calculating pressure and chemical potential using the cubic-splines interpolation.
+
+\begin{equation} \label{eq:equal_press}
+	P^{vap}(\rho^{vap}) - P^{liq}(\rho^{liq}) = 0
+\end{equation}
+
+\begin{equation} \label{eq:equal_chem_pot}
+	\mu^{vap}(\rho^{vap}) - \mu^{liq}(\rho^{liq}) = 0
+\end{equation} 
+
+	A simple newton-raphson algorithm should suffice, given that the initial guesses are consistent and far away from the trivial solution (the root at the mechanically unstable region at the pressure isotherm). A good initial guess for the vapor density should be below the pressure of the isotherm minimum inside the coexistence curve, in the vapor region, in cases where the minimum pressure is negative, a value near zero should suffice. The initial guess for the liquid density can be any density with a pressure higher than the isotherm maximum. However, to solve step (5), many different algorithms can be used.
+
+\setcounter{equation}{0}
+\section{Equations and Algorithm for Phase Equilibria Calculations for Mixtures}
+
+	In this work, a very usual application of the isofugacity method was used. However, we do believe that to calculate the phase equilibria for binary or even multicomponent mixtures, very common algorithms  \DIFdelbegin \DIFdel{~}\DIFdelend \cite{michelsen1982isothermal1,michelsen1982isothermal} or more recent ones '  \DIFdelbegin \DIFdel{~}\DIFdelend \cite{segtovich2016simultaneous,gupta1991method} can be used, since the calculation of thermodynamic properties and variables is very straigthforward using bicubic spline interpolations. It should be noted that the renormalization method, as it was applied, is specified in temperature, thus, applications in which the temperature is not constant may be computationally cumbersome.
+
+	As an example, an algorithm to calculate Pxy envelopes for binary mixtures is as follows:
+
+	(1) Upon specifying the temperature and molar fractions, use steps (1-3) from the procedure presented in Appendix A to obtain a renormalized Helmholtz free energy density curve
+
+	(2) Iterate over the molar fractions from 0 to 1 to obtain a renormalized Helmholtz free energy density in function of adimensional density and molar fractions. The use of the adimensional density is what makes this step possible, since the density curve changes as the molar fractions changes.
+
+	(3) Enter the envelope calculation algorithm, interpolating the renormalized Helmholtz free energy density surface with bicubic splines to calculate the fugacity for each component from the following equations:
+
+	From the Helmholtz free energy density surface, a pressure surface can be calculated since
+
+\begin{equation} \label{eq:press_helm_deriv}
+	P = -\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\partial A}{\partial V}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend _{T,\textbf{n}}
+\end{equation}
+
+	Therefore,
+
+\begin{equation} \label{eq:press_helm_deriv2}
+	P = -f+\rho\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\partial f}{\partial \rho}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend _{T,\textbf{n}}
+\end{equation}
+
+	From the pressure-surface, with specified mole fraction, there is an isotherm in terms of pressure in function of density, from which, the densities of both phases can be calculated solving the equation:
+
+\begin{equation} \label{eq:p_guess}
+	P(\rho) - P_{guess} = 0
+\end{equation}	
+
+	Where $P$ is calculated using the cubic spline interpolation for a given density guess. The highest root of equation~\ref{eq:p_guess} corresponds to the liquid phase density, while the lower is the vapor phase density, good initial guesses for density could follow the pure substance algorithm. With the densities of both phases, the residual chemical potential for the \textit{i}th component in each phase can be calculated from
+
+\begin{equation} \label{eq:chem_pot_i}
+	\mu_{i}^{res} = \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\partial f^{res}}{\partial \rho{*}}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend _{T,x_{k\neq j,nc}}b_{i}+\sum_{j=1}^{nc} \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\partial f^{res}}{\partial x_{j}}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend _{T,\rho b,x_{k\neq j,nc}} \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\delta_{ij} \rho_{i}-\rho_{j}}{\rho^{2}}\DIFdelbegin %DIFDELCMD < \right)
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \Bigg)
+\DIFaddend \end{equation} 
+
+	Where the derivatives are calculated using the finite-difference method on the Helmholtz free energy density surface, using bicubic splines for interpolation. Finally, to calculate fugacity, the following equation applies:
+
+\begin{equation} \label{eq:fugacity}
+	ln\phi_{i} = \frac{\mu_{i}^{res}}{RT} - ln\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{P}{RT\rho}\DIFdelbegin %DIFDELCMD < \right)
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \Bigg)
+\DIFaddend \end{equation}
+
+	With these equations, using the pressure and Helmholtz surfaces after applying the renormalization method, the fugacity coefficients can be readily calculated using bicubic spline interpolations and finite-difference derivatives.	
+
+\setcounter{equation}{0}
+\section{Equations for Derivative Properties calculations}
+
+	The equations used to calculate the second derivative properties were as follows
+
+\begin{equation} \label{eq:Cvres_deriv}
+	C_{v}^{res} = -T\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\partial^{2}\bar{a}}{\partial T^{2}}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend _{V}
+\end{equation}
+
+\begin{equation} \label{eq:Cv_deriv}
+	C_{v} = C_{v}^{res} + C_{v}^{ig}
+\end{equation}
+
+\begin{equation} \label{eq:Cpres_deriv}
+	C_{p}^{res} = C_{v}^{res} + T \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\partial P}{\partial T}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend _{V,\textbf{n}} \DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \Bigg(\DIFaddend \frac{\partial v}{\partial T}\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \Bigg)\DIFaddend _{P}
+\end{equation}
+
+\begin{equation} \label{eq:Cp_deriv}
+	C_{p} = C_{p}^{res} + C_{p}^{ig}
+\end{equation}
+
+\begin{equation} \label{eq:Cvig_deriv}
+	C_{v}^{ig} = C_{p}^{ig} - R
+\end{equation}
+
+\begin{equation} \label{eq:u_deriv}
+	c_{sound} = \DIFdelbegin \DIFdel{\sqrt{\frac{C_{p}}{M_{w} C_{v}}\left(\frac{\partial P}{\partial \rho}\right)_{T,\textbf{n}}}
+}\DIFdelend \DIFaddbegin \DIFadd{\sqrt{\frac{C_{p}}{M_{w} C_{v}}\Bigg(\frac{\partial P}{\partial \rho}\Bigg)_{T,\textbf{n}}}
+}\DIFaddend \end{equation}
+
+	Where $C_{p}^{ig}$ is the ideal gas heat capacity obtained from a database correlation [REF]. All derivatives are calculated using the finite-difference method with five-point-stencils.
+
+\end{appendices}
+
+%\bibliographystyle{ieeetr}
+\bibliographystyle{elsarticle-num}
+%\bibliographystyle{•}1-num-names}
+\nocite{*}
+
+\section*{\refname}
+
+\bibliography{references}
+
+
+
+\end{document}
