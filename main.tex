@@ -6,7 +6,7 @@
 
 \linespread{2}
 \usepackage[version=4]{mhchem}
-\usepackage[author=Charlles]{pdfcomment}
+\usepackage{pdfcomment}
 \usepackage{makecell}
 
 
@@ -180,7 +180,7 @@ with
 \end{equation}
 	where $\alpha$ is the interaction volume, in units of energy volume, given by
 \begin{equation} \label{eq:alphav}
-    $\alpha$ = -\frac{1}{2} \int u_\text{att} dr,
+    \alpha = -\frac{1}{2} \int u_\text{att} dr,
 \end{equation}
 	where $u_\text{att}$ is the attractive part of the potential. Since there is no explicit potential for the CPA equation of state, considering previous work with both the SRK and CPA equations of state \cite{cai2004thermodynamics,pcm2017application,xu2010crossover}, the attractive part of the potential is correlated to half of the $a$ term, which here is considered an approximation to the contribution of the attractive part of the potential (divided by the volume) to the Helmholtz free energy density, leading to 
 \begin{equation} \label{eq:arho2}
@@ -239,20 +239,20 @@ and
 
     The substances analyzed here are n-butane, n-octane, methanol, ethanol, \ce{CO_2}, and \ce{H_{2}S}. These substances were chosen because of the different associative combinations that could be evaluated. n-Butane and \ce{CO_2} were considered as non-associative substances, while methanol, ethanol, and \ce{H_{2}S} are considered as associative ones. There is a large discussion on the literature on the most adequate associating models and considerations to represent these substances, mainly \ce{CO_2} \citep{bjorner2016modeling} and \ce{H_{2}S} \citep{ruffine2006represent}. A common example is whether \ce{CO_2} should actually be considered as an associating molecule and, furthermore, whether the extent of quadrupole forces is important \cite{tsivintzelis2011modeling,bjorner2016modeling}.
     
-	The parameters for all substances are summarized in \cref{table:CPA_parameters}. For all cases, the \mbox{CR-1} combination rule is considered for the association parameters (comprised of arithmetic mean for the cross-association energy and geometric mean for the cross-association volume) \pdfcomment{Incluir referência para essa regra de combinação} \pdfcomment{Gabriel: Não achei nenhuma referência para essa regra de combinação, devo citar outro trabalho que utilize ela e exemplifique-a?}. In cases where both substances are associating, cross-association is considered. The critical properties for each substance are shown in \cref{table:crit_exp}. The terminology for the association models follows that of Huang and Radosz \cite{huang1990equation}.
+	The parameters for all substances are summarized in \cref{table:CPA_parameters}. For all cases, the \mbox{CR-1} combination rule is considered for the association parameters (comprised of arithmetic mean for the cross-association energy and geometric mean for the cross-association volume). Cross-association is considered in cases where both substances are associating ones. The critical properties for each substance are shown in \cref{table:crit_exp}. The terminology for the association models follows that of Huang and Radosz \cite{huang1990equation}.
 
 \begin{table}[h!]
 \centering
 \caption{Parameters of the CPA equation of state used in this work.}
 \label{table:CPA_parameters}
 \makebox[\textwidth]{\begin{tabular}{ccccccc}
-                                                                                                              \hline
+\hline
 Substance   & \thead{Association\\Model} & \thead{$a_{0_{i}}$\\($Pa.m^{6}.mol$)} & \thead{$b_{i}$\\($10^{5} \, m^{3}.mol^{-1}$)} & $c_{1_{i}}$      & \thead{$\epsilon_{i}^{A_{i}B_{j}}$\\($MPa.m^{3}.mol^{-1}$)} & $\beta_{i}^{A_{i}B_{j}}$  \\ \hline
 n-Butane    & n.a.              & 1.29            & 7.21         & 0.70771 & -                    & -      \\
 Methanol    & 2B                & 0.405           & 3.098        & 0.43102 & 0.024591             & 0.0161 \\
 Ethanol     & 2B                & 0.867           & 4.911        & 0.7369  & 0.021532             & 0.008  \\
-\ce{CO_2}         & n.a.              & 0.351           & 2.72         & 0.7602  & -                    & -      \\
-\ce{H_{2}S}         & 4C                & 0.32            & 2.93         & 0.82805 & 0.00146              & 0.486  \\ \hline     
+\ce{CO_2}   & n.a.              & 0.351           & 2.72         & 0.7602  & -                    & -      \\
+\ce{H_{2}S} & 4C                & 0.32            & 2.93         & 0.82805 & 0.00146              & 0.486  \\ \hline     
 \end{tabular}}
 \raggedright n.a. = non-associative
 \end{table}
@@ -267,14 +267,14 @@ Substance   & $T_{c}$ ($K$) & $P_{c}$ ($MPa$) & $\rho_{c}$ ($mol/m^{3}$)  \\ \hl
 n-Butane    & 425.2  & 3.797    & 3920          \\
 Methanol    & 512.6  & 8.096    & 8510          \\
 Ethanol     & 514.0  & 6.384    & 6000          \\
-\ce{CO_2}         & 304.2  & 7.382    & 10600         \\
-\ce{H_{2}S}         & 373.4  & 8.960    & 10200         \\ \hline     
+\ce{CO_2}   & 304.2  & 7.382    & 10600         \\
+\ce{H_{2}S} & 373.4  & 8.960    & 10200         \\ \hline     
 \end{tabular}}
 \end{table}
 
     After the estimation of parameters $\phi$ (\cref{eq:fns}) and L (\cref{eq:Kn}) and calculation of the vapor-liquid equilibrium phase envelope, the critical exponent $\beta$ was evaluated using a linear regression curve calculated from
 \begin{equation} \label{eq:beta_law}
-    \ln\left|\frac{\rho_{liq}-\rho_{vap}}{\rho_{c}}\right| = \beta \ln\left|\frac{T-T_{c}}{T_{c}}\right|+cte \qquad (T \rightarrow T_{c}).
+    \ln\left|\frac{\rho_{liq}-\rho_{vap}}{\rho_{c}}\right| = \beta \ln\left|\frac{T-T_{c}}{T_{c}}\right|+\text{const.} \qquad (T \rightarrow T_{c}).
 \end{equation}
 
 \section{Numerical Procedures}
