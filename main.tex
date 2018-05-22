@@ -272,19 +272,19 @@ Ethanol     & 514.0  & 6.384    & 6000          \\
 \end{tabular}}
 \end{table}
 
-    After the estimation of parameters $\phi$ (\cref{eq:fns}) and L (\cref{eq:Kn}) and calculation of the vapor-liquid equilibrium phase envelope, the critical exponent $\beta$ was evaluated using a linear regression curve calculated from
+    After estimation of parameters L and $\phi$ in \cref{eq:fns,eq:Kn}, and calculation of the vapor-liquid phase envelope, the critical exponent $\beta$ was evaluated using a linear regression from
 \begin{equation} \label{eq:beta_law}
-    \ln\left|\frac{\rho_{liq}-\rho_{vap}}{\rho_{c}}\right| = \beta \ln\left|\frac{T-T_{c}}{T_{c}}\right|+\text{const.} \qquad (T \rightarrow T_{c}).
+    \ln\left|\frac{\rho_\text{liq}-\rho_\text{vap}}{\rho_{c}}\right| = \beta \ln\left|\frac{T-T_{c}}{T_{c}}\right|+\text{const.} \qquad (T \rightarrow T_{c}).
 \end{equation}
 
 \section{Numerical Procedures}
-    From an initial grid of density (and mole fractions, in the case of mixtures), the Helmholtz free energy density is calculated to all points in the grid. Further, equations~\cref{eq:f00,eq:fn,eq:dfn,eq:Kn,eq:Omega,eq:Gn,eq:fns,eq:fnl} are applied considering the given points of the grid. Iterations are calculated until no further change is observed to the free energy in every point of the grid ($df_{n}(\rho) \cong$ 0 condition). Here, 5 iteration steps are considered enough to reach convergence in a grid of 500 density points. The number of points (500) in the grid is enough for all calculations presented here. Other authors considered even less grid density points (400, and even 200) \cite{cai2004thermodynamics}. These numbers of steps and grid points were tested in preliminary studies (see Figures~\ref{fig:dfn} and~\ref{fig:PV_evol}).
+    From an initial grid of densities (and mole fractions, in the case of mixtures), the Helmholtz free energy density is calculated at all points in the grid. Then, \cref{eq:f00,eq:fn,eq:dfn,eq:Kn,eq:Omega,eq:Gn,eq:fns,eq:fnl} are applied considering such points. Iterations are done until no further change is observed to the free energy in every point ($df_{n}(\rho) \cong 0$). Here, 5 iterations have been observed as sufficient to reach convergence in a grid of 500 density points. Such number of points is enough for all calculations presented here. Other authors considered even less density grid points (400, or even 200) \cite{cai2004thermodynamics}. These numbers of steps and grid points were tested in preliminary studies (see \cref{fig:dfn,fig:PV_evol}).
 
-    The renormalized grid of Helmholtz energy density was interpolated using cubic splines (or bicubic spline in the case of binary mixtures) and the derivatives of this grid were used to calculate variables of interest of vapor-liquid phase equilibrium, as chemical potential and pressure. Details of equations and algorithms are given in Appendices A and B.
+    The renormalized grid of Helmholtz free energy density was interpolated using cubic splines (or bicubic spline in the case of binary mixtures) and the derivatives of this grid were used to calculate variables of interest in the vapor-liquid phase equilibrium, such as chemical potential and pressure. Details of equations and algorithms are given in Appendices A and B.
 
-    As mentioned in the previous section, for mixtures, the considered density to calculate fluctuations is the total molar density of the mixture (the isomorphism assumption) and mole fractions are used as independent variables.
+    As mentioned in the previous section, for mixtures, the total molar density of the mixture is considered for calculating fluctuations (the isomorphism assumption) while mole fractions are used as independent variables.
 
-    Upon analyzing and determining the parameters related to the renormalization method for pure substances, phase equilibrium calculations for binary mixtures were made in a sort of different conditions (both subcritical and critical), using the isofugacity method.
+    Upon analyzing and determining the parameters related to the renormalization method for pure substances, phase equilibrium calculations for binary mixtures were carried out at a number of different conditions (both subcritical and critical) using the isofugacity method.
     
 \section{Parameter Estimation}
     Both parameters related to the renormalization were considered to be adjustable. Therefore, both parameters were obtained by fitting densities and vapor pressures to experimental data using a single objective function, given as
