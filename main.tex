@@ -60,18 +60,19 @@
 \author[1]{Gabriel M. Silva}
 \author[1]{Charlles R. A. Abreu}
 \author[1,2]{Frederico W. Tavares}
-\address[1]{Escola de Química, Universidade Federal do Rio de Janeiro, Rio de Janeiro C.P. 68542, Brazil}
-\address[2]{Programa de Engenharia Química – COPPE, Universidade Federal do Rio de Janeiro, Rio de Janeiro, C.P. 68542, Brazil}
+\address[1]{Escola de Qu\'imica, Universidade Federal do Rio de Janeiro, Rio de Janeiro C.P. 68542, Brazil}
+\address[2]{Programa de Engenharia Qu\'imica – COPPE, Universidade Federal do Rio de Janeiro, Rio de Janeiro, C.P. 68542, Brazil}
 
 \begin{abstract}
-Calculation of thermodynamic properties such as vapor-liquid phase equilibrium with equations of state is largely and successfully employed in chemical engineering.
+Calculation of thermodynamic properties such as vapor-liquid phase behavior with equations of state is largely and successfully employed in chemical engineering applications.
 However, in the proximities of the critical point, the different density-fluctuation scales inherent to critical phenomena introduce significant changes in these thermodynamic properties, with which the classical equations of state are not prepared to deal.
-Aiming at correcting this failure, a renormalization group methodology has been applied to the CPA equation of state in order to improve the thermodynamic description in the vicinity of critical points, both for vapor-liquid equilibrium of pure components and binary mixtures and for derivative properties such as speed of sound and heat capacity.
-The results show that the applied methodology is able to provide an equation of state with the correct non-classical behavior, thus bringing it in consonance with experimental observations for derivative properties and vapor-liquid equilibrium in near-critical conditions.
+Aiming at correcting this failure, we apply a renormalization-group methodology to the CPA equation of state in order to improve the thermodynamic description in the vicinity of critical points.
+We use this approach to compute vapor-liquid equilibrium of pure components and binary mixtures, as well as derivative properties such as speed of sound and heat capacity.
+Our results show that this methodology is able to provide an equation of state with the correct non-classical behavior, thus bringing it in consonance with experimental observations vapor-liquid equilibrium and derivative properties in near-critical conditions.
 \end{abstract}
 
 \begin{keyword}
-Renormalization \sep Cubic-Plus-Association \sep Phase Equilibria \sep Derivative Properties
+Renormalization \sep Cubic-Plus-Association \sep Phase Equilibrium \sep Speed of Sound \sep Heat Capacity
 \end{keyword}
 
 \end{frontmatter}
@@ -83,11 +84,11 @@ Renormalization \sep Cubic-Plus-Association \sep Phase Equilibria \sep Derivativ
 \section{Introduction}
 
 The development of industrial processes requires models capable of describing fluid behavior and properties with accuracy.
-The equations of state are very successful tools when used to calculate thermodynamic properties of fluids far away from their critical points.
-However, they fail in near-critical, critical and supercritical conditions, in which fluids undergo several changes in their classical behavior \cite{sengers1986thermodynamic}.
+Equations of state are very successful tools when used to calculate thermodynamic properties of fluids far away from their critical points.
+However, they fail in near-critical and critical conditions, in which fluids undergo several changes in their classical behavior \cite{sengers1986thermodynamic}.
 
-Many unit operations in engineering involve high pressure or high temperature conditions, in which many mixtures approach critical and/or supercritical states.
-Common examples occur in natural gas processing, in which the natural gas can form mixtures with \ce{CO_2} and \ce{H_{2}S} and be found in near- or supercritical states either at reservoir or at transport/operating conditions  \citep{kermani2003carbon}.
+Many unit operations in engineering involve high pressure or high temperature conditions, in which many mixtures approach critical states.
+Common examples occur in natural gas processing, in which the natural gas can form mixtures with \ce{CO_2} and \ce{H_{2}S} and be found in near-critical states either at reservoir or at transport/operating conditions  \citep{kermani2003carbon}.
 
 Experimentally, it is observed that fluids exhibit a universal non-classical behavior in the vicinity of critical points, which is evidenced in the so-called critical exponents \citep{carles2010brief}.
 One theoretical explanation is that, at the critical point, the correlation length is in the order of the system size and, because only fluctuations with wavelengths below the correlation length have an expressive impact on the free energy of a fluid, long-wavelength interactions play a major role in the near-critical region.
@@ -97,41 +98,39 @@ Far away from the critical point, instead, the correlation length is in the orde
 Equations of state are commonly used to model fluids in industrial processes.
 For instance, the Soave-Redlich-Kwong (SRK) \cite{soave1972equilibrium} and Peng-Robinson (PR) \cite{peng1976new} equations of state are used in a wide range of applications.
 However, for some applications in which molecules are capable of making hydrogen-bonds, both equations present poor performance in representing liquid phases, both for phase equilibrium and derivative properties.
-In order to overcome this limitation, Kontogeorgis \textit{et al}.
-\citep{kontogeorgis1996equation} combined the SRK equation of state with Wertheim's first-order thermodynamic perturbation theory (TPT-1), such as in SAFT \citep{chapman1990new}, and the resulting equation of state (Cubic-Plus-Association, CPA) is capable of representing with better accuracy phase equilibrium and derivative properties of pure substances and mixtures far from critical points.
+In order to overcome this limitation, Kontogeorgis \textit{et al}. \cite{kontogeorgis1996equation} combined the SRK equation of state with Wertheim's first-order thermodynamic perturbation theory (TPT-1), such as in SAFT \citep{chapman1990new}.
+The resulting equation of state (Cubic-Plus-Association, CPA) is capable of representing phase equilibrium and derivative properties of pure substances and mixtures with better accuracy in states far enough from critical points.
 
-The lack of accuracy of classical equations of state in describing thermodynamic properties in conditions near- and at the critical point is evidenced by the fact that they predict a critical exponent of $1/2$, while the value actually observed experimentally is $1/3$ \cite{sengers1974van,wyczalkowska2004critical,stanley1999scaling}.
-Somewhat common in the literature are strategies to improve the description of critical behavior by equations of state based on reestimating parameters, with rather good results being achieved \cite{palma2017re,vinhal2017evaluation}.
+The lack of accuracy of classical equations of state in describing thermodynamic properties in near-critical conditions is evidenced by the fact that they predict a critical exponent of $1/2$, while the value actually observed experimentally is $1/3$ \cite{sengers1974van,wyczalkowska2004critical,stanley1999scaling}.
+Strategies to improve the description of critical behavior by equations of state based on reestimating parameters are somewhat common in the literature, with rather good results being achieved \cite{palma2017re,vinhal2017evaluation}.
 In all cases, however, due to the nature of equations of state one cannot correct the scaling of critical phenomena by simply reestimating parameters.
 
 The equations of state are mean-field theories by nature, and hence do not treat density fluctuations correctly as the fluid approach the critical point.
-Consequently, the critical exponents which they predict differ from those obtained from experiments.
-Many theories aim to correct the behavior of classical equations of state.
-Some methods are based on the hierarchical reference theory \cite{parola1984liquid,parola1985hierarchical,meroni1990differential,meroni1993differential}.
-However, these methods have not been frequently developed and applied because of its mathematical complexity.
-Another category of methods is based on a renormalized Landau expansion of the free energy \cite{wyczalkowska2004critical,chen1990crossover,kiselev1991universal,kiselev1998cubic,anisimov1992crossover,kiselev1999cubic,kiselev1999crossover}, which introduces a crossover behavior to the equations of state, turning them into non-analytical models with many adjustable parameters.
-The last category of methods, developed by White and Zhang \cite{white1993renormalization,white1995renormalization,white1998renormalization}, relies on the renormalization group (RG) theory via Phase Space Cell Approximation.
+%Consequently, the critical exponents which they predict differ from those obtained from experiments.
+Many theories aim at introducing non-classical behavior to equations of state.
+Some methods are based on the hierarchical reference theory \cite{parola1984liquid, parola1985hierarchical, meroni1990differential, meroni1993differential}, but these have not been frequently developed and applied because of its mathematical complexity.
+Another category of methods is based on a renormalized Landau expansion of the free energy \cite{wyczalkowska2004critical, chen1990crossover, kiselev1991universal, kiselev1998cubic, anisimov1992crossover, kiselev1999cubic, kiselev1999crossover}, which introduces a crossover behavior to the equations of state, turning them into non-analytical models with many adjustable parameters.
+A third category of methods, developed by White and Zhang \cite{white1993renormalization, white1995renormalization, white1998renormalization}, relies on the renormalization group (RG) theory via phase space cell approximation.
 This method introduces a recursive procedure intended to renormalize the free energy obtained from equations of state.
-
-With this approach, it is possible to treat the problem of fluctuations in different scales, evolving from fluctuations in the microscopic scale up to the macroscopic measured scale in a recursive manner.
-Thus, it is possible, using common equations of state, to better represent phase equilibrium and thermodynamic properties of pure substances and mixtures in conditions that comprehend near-critical and supercritical states.
+With this approach, it is possible to treat the problem of fluctuations in different scales, evolving from the microscopic scale up to the macroscopic scale in a recursive manner.
+In this fashion, one is able to use common equations of state to better represent phase equilibrium and thermodynamic properties in conditions that comprehend near-critical and supercritical states.
 
 Since its first application \citep{white1993renormalization}, White and Zhang’s recursive method has been improved by a number of authors.
-The same authors extended the range in which the method could be applied  \citep{white1998renormalization}, Lue and Prausnitz \cite{lue1998renormalization,lue1998brenormalization} and Mi \textit{et al}.
- \cite{mi2004improved} improved the method so that is can be applied to the whole range of temperature, even far away from the critical point.
-Up to this publication, many authors have applied this method using different mean-field theories (e.g.
-MSA \citep{lue1998renormalization}, equation of state for chain fluids \cite{jiang1999equation,jiang2000phase}, SAFT equation of state and its variations \cite{llovell2004thermodynamic,forte2011application,bymaster2008renormalization,tang2010renormalization,llovell2006global,forte2013application,dias2009thermodynamic,llovell2006second,llovell2006prediction,llovell2007phase}, cubic equations of state  \cite{xu2011prediction,xu2010crossover,pcm2017application,llovell2008accurate,qiu2006vapor,cai2006vapor,cai2004thermodynamics}, and others  \cite{ghobadi2013renormalization,choi2016renormalization}) obtaining similar results.
-However, some aspect in the method are still unclear, e.g.
-parameter estimation procedures and approximations in the renormalization equations.
-There is still need for further assessment of the method's capabilities and limitations.
+The same authors, for instance, extended the range in which the method could be applied \cite{white1998renormalization}.
+Lue and Prausnitz \cite{lue1998renormalization, lue1998brenormalization} and Mi \textit{et al}. \cite{mi2004improved} improved the method so that is can be applied to a large temperature range, even far away from the critical point.
+Thus far, many authors have applied this method using different mean-field theories (e.g.
+MSA \citep{lue1998renormalization}, equation of state for chain-like molecules \cite{jiang1999equation, jiang2000phase}, the SAFT equation and its variants \cite{llovell2004thermodynamic, forte2011application, bymaster2008renormalization, tang2010renormalization, llovell2006global, forte2013application, dias2009thermodynamic, llovell2006second, llovell2006prediction, llovell2007phase}, cubic equations \cite{xu2011prediction,xu2010crossover,pcm2017application,llovell2008accurate,qiu2006vapor,cai2006vapor,cai2004thermodynamics}, and others \cite{ghobadi2013renormalization,choi2016renormalization}), obtaining similar results.
+However, some aspects in the method are still unclear, including parameter estimation procedures and approximations in the renormalization equations.
+Hence, there is still need for further assessment of the method's capabilities and limitations.
 
-This work aims at evaluating the impacts on modeling phase equilibrium and derivative properties when applying the renormalization group theory with the CPA equation of state, referred to as the CPA+RG approach for short.
-We studied pure substances and different mixtures including \ce{CO_2} and \ce{H_{2}S}, in conditions near-to and far from the critical point.
-We provide a parameter estimation procedure that improves the methodology.
+The present work aims at evaluating the impacts on modeling phase equilibrium and derivative properties when applying the renormalization group theory with the CPA equation of state, referred to as the CPA+RG approach for short.
+We studied several pure substances, as well as different mixtures containing \ce{CO_2} or \ce{H_{2}S}, in conditions near-to and far from the critical point.
+In addition, we provide a parameter estimation procedure that improves the methodology.
 
-This article is divided as follows: First, we discuss briefly on the applied mean-field theory (the CPA equation of state) and the renormalization-group methodology.
+This article is divided as follows.
+First, we discuss briefly on the applied mean-field theory (the CPA equation of state) and the renormalization-group methodology.
 This is followed by details of the numerical procedures.
-Then, we present phase equilibrium results of pure and binary mixtures, as well as results for derivative properties such as heat capacity and speed of sound.
+Then, we present phase equilibrium results of pure substances and binary mixtures, as well as results for derivative properties such as heat capacity and speed of sound.
 Finally, we present some concluding remarks.
 
 \section{Thermodynamic Modeling}
