@@ -138,14 +138,17 @@ Finally, we present some concluding remarks.
 Pure substances and binary mixtures in vapor-liquid equilibrium and at supercritical conditions were evaluated using the Cubic-Plus-Association equation of state \citep{kontogeorgis1996equation}.
 In its pressure-explicit form, such equation reads
 \begin{equation} \label{eq:pressure_cpa}
-P = \frac{RT}{v-b}-\frac{a}{v(v+b)}-\frac{1}{2}\frac{RT}{v} \left(1+\rho\frac{\partial \ln g}{\partial \rho}\right)\sum_{i=1}^{n_c} x_{i} \sum_{A_{i}}(1-X_{A_{i}})
+%P = \frac{RT}{v-b}-\frac{a}{v(v+b)}-\frac{1}{2}\frac{RT}{v} \left(1+\rho\frac{\partial \ln g}{\partial \rho}\right)\sum_{i=1}^{n_c} x_{i} \sum_{A_{i}}(1-X_{A_{i}})
+P = \frac{\rho RT}{1-\rho b}-\frac{a \rho^2}{1+\rho b}-\frac{1}{2} \rho RT \left(1+\rho\frac{\partial \ln g}{\partial \rho}\right)\sum_{i=1}^{n_c} x_{i} \sum_{A_{i}}(1-X_{A_{i}})
 \end{equation}
 where $P$ is the pressure,
 $R$ is the ideal gas constant,
-$v$ is the molar volume,
+%$v$ is the molar volume,
+$\rho$ is the molar density,
 $b$ is the mixture co-volume parameter,
 $a$ is the mixture energy parameter,
 $T$ is the temperature,
+$g$ is the contact-value of the radial distribution function,
 $n_c$ is the number of components in the mixture,
 $x_{i}$ is the mole fraction of the $i$-th component,
 $A_{i}$ is the association site $A$ of the $i$-th component, and
