@@ -208,34 +208,39 @@ The version of the CPA equation of state presented here is commonly referred to 
 In this work, $X_{A_{i}}$ is calculated following the numerical procedure proposed by Michelsen \textit{et al}.
  \citep{michelsen2006robust}.
 
-The recursive method developed by White and Zhang \citep{white1993renormalization}, \citep{white1995renormalization}, \citep{white1998renormalization}, and by Salvino and White \citep{salvino1992calculation} introduces density fluctuations to a given framework of Helmholtz energy density.
-The method is based on the Phase Space Cell Approximation method developed by Wilson \citep{wilson1971renormalization}, \citep{wilson1971brenormalization}, where each iteration accounts for fluctuations of longer and longer wavelengths, thus, introducing a non-analytic correction to the analytical equation of state.
+The recursive method developed by White and Zhang \cite{white1993renormalization, white1995renormalization, white1998renormalization} and by Salvino and White \citep{salvino1992calculation} introduces density fluctuations to \hl{a given framework} of Helmholtz energy density.
+\pdfcomment[author=Charlles]{A expressão "a given framework" é vaga. Deveríamos trocá-la por uma expressão mais precisa.}
+The method is based on the phase space cell approximation developed by Wilson \cite{wilson1971renormalization, wilson1971brenormalization}, where each iteration accounts for fluctuations of longer and longer wavelengths.
+This introduces a non-analytic correction to the analytical equation of state.
 An illustration of the method is represented in Fig.~\ref{fig:schematics}.
 
 \begin{figure}[h!]
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{renorm_schematics.png}}
-\caption{Phase Space Cell Approximation schematics, first, interactions between molecules are calculated with a mean-field theory (a), then, fluctuations are included and neighbor molecules are considered to be a whole molecule (b), further iterations of the method are calculated (c)}
+\caption{Schematics of the phase space cell approximation. First, interactions between molecules are calculated with a mean-field theory. Next, fluctuations are included and \hl{nearby molecules are considered to form clusters which behave as single entities. Then, iterations are then carried out until.......}}
 \label{fig:schematics}
 \end{figure}
 
-The renormalization group theory as introduced by White and Zhang \cite{white1993renormalization} and further developed by Lue and Prausnitz \cite{lue1998renormalization,lue1998brenormalization} is based on a transformation of the grand canonical partition function into a functional integral.
-Firstly, the interaction potential is considered to be divided into two main contributions, a reference term (related to short-range repulsions) and a perturbation term (related to long-range attractive interactions).
-Thus,
+The renormalization group theory as introduced by White and Zhang \cite{white1993renormalization} and further developed by Lue and Prausnitz \cite{lue1998renormalization, lue1998brenormalization} is based on a transformation of the grand canonical partition function into a functional integral.
+Firstly, the interaction potential $u(r)$ is considered to be divided into two main contributions, a reference term (related to short-range repulsions) and a perturbation term (related to long-range attractive interactions), that is,
 \begin{equation} \label{eq:u(r)}
-u(r) = u_\text{ref}(r) + u_\text{pert}(r)
+u(r) = u_\text{ref}(r) + u_\text{pert}(r).
 \end{equation}
-where $u(r)$ is the interaction potential, $u_\text{ref}(r)$ is the reference contribution, and $u_\text{pert}(r)$ is the perturbation contribution.
-Considering that the repulsive part of the potential accounts only for very short-wavelength fluctuations and that the perturbation part takes into account both short-wavelength and long-wavelength fluctuation contributions, the renormalization method is applied only to the attractive part of the potential.
-Mean-field theories are considered to provide a good approximation for the short-range repulsions and fluctuations under a given cutoff length L.
-The integral responsible for accounting for the short-wavelength fluctuations, which can be calculated with the mean-field theory, is
+%where $u(r)$ is the interaction potential, $u_\text{ref}(r)$ is the reference contribution, and $u_\text{pert}(r)$ is the perturbation contribution.
+\pdfcomment[author=Charlles]{Aqui não está claro o que r significa exatamente. Isso também tem implicações em outras equações a seguir.}
+
+Considering that the repulsive part of the potential accounts only for very-short-wavelength fluctuations and that the perturbation part takes into account both short- and long-wavelength fluctuations, the renormalization method is applied only to the attractive part.
+Mean-field theories are considered to provide a good approximation for the short-range repulsions and fluctuations smaller than a given cutoff length $L$.
+The integral responsible for accounting for the short-wavelength fluctuations is
 \begin{equation} \label{eq:Fs}
 F_{s}(\rho) = \int f^\text{EoS} dr,
 \end{equation}
+\pdfcomment[author=Charlles]{Mais uma vez, a coordenada r não está devidamente identificada.}
 where $f^\text{EoS}$ is the Helmholtz free energy density calculated using the mean-field theory (in this work, the CPA equation of state), thus
 \begin{equation} \label{eq:f_to_a}
-f^{EoS} = \frac{\bar{a}^{EoS}}{v}.
+%f^{EoS} = \frac{\bar{a}^{EoS}}{v}.
+f^\text{EoS} = \rho \bar{a}^{EoS}.
 \end{equation}
 
 As we are concerned only with the attractive part, in order to apply the renormalization method we need to subtract the attractive potential already included in the mean-field solution, considering it to be a bad approximation, since the mean-field theory cannot deal accurately with long-wavelength fluctuations.
