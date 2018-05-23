@@ -134,62 +134,74 @@ Then, we present phase equilibrium results of pure substances and binary mixture
 Finally, we present some concluding remarks.
 
 \section{Thermodynamic Modeling}
-Pure substances and binary mixtures in vapor-liquid equilibrium and at supercritical conditions were evaluated using the Cubic-Plus-Association equation of state  \citep{kontogeorgis1996equation}.
-In the pressure-explicit form, such equation reads
+
+Pure substances and binary mixtures in vapor-liquid equilibrium and at supercritical conditions were evaluated using the Cubic-Plus-Association equation of state \citep{kontogeorgis1996equation}.
+In its pressure-explicit form, such equation reads
 \begin{equation} \label{eq:pressure_cpa}
-P = \frac{RT}{v-b}-\frac{a}{v(v+b)}-\frac{1}{2}\frac{RT}{v} \left(1+\rho\frac{\partial \ln g}{\partial \rho}\right)\sum_{i} x_{i} \sum_{A_{i}}(1-X_{A_{i}})
+P = \frac{RT}{v-b}-\frac{a}{v(v+b)}-\frac{1}{2}\frac{RT}{v} \left(1+\rho\frac{\partial \ln g}{\partial \rho}\right)\sum_{i=1}^{n_c} x_{i} \sum_{A_{i}}(1-X_{A_{i}})
 \end{equation}
-where $P$ is the pressure, $R$ is the ideal gas constant, $v$ is the molar volume, $b$ is the mixture co-volume parameter, $a$ is the mixture energy parameter, $T$ is the temperature, $x_{i}$ is the mole fraction of the $i$-th component, $A_{i}$ is the association site $A$ of the $i$-th component and $X_{A_{i}}$ is the fraction of non-associated $A$ sites of the $i$-th component.
-As the renormalization procedure calculates corrections explicitly to the Helmholtz free energy density, it is useful to represent the CPA equation of state in its Helmholtz-explicit form, given by
+where $P$ is the pressure,
+$R$ is the ideal gas constant,
+$v$ is the molar volume,
+$b$ is the mixture co-volume parameter,
+$a$ is the mixture energy parameter,
+$T$ is the temperature,
+$n_c$ is the number of components in the mixture,
+$x_{i}$ is the mole fraction of the $i$-th component,
+$A_{i}$ is the association site $A$ of the $i$-th component, and
+$X_{A_{i}}$ is the fraction of non-associated type-$A$ sites of the $i$-th component.
+As the renormalization procedure provides corrections explicitly to the Helmholtz free energy density, it is useful to represent the CPA equation of state in its Helmholtz-explicit form, given by
 %\begin{subequations}
 \begin{equation} \label{eq:helm_res_cpa}
-\bar{a}_{CPA}^{res} =\bar{a}_{SRK}^{res} + \bar{a}_{assoc}^{res},
+\bar{a}_\text{CPA}^\text{res} =\bar{a}_\text{SRK}^\text{res} + \bar{a}_\text{assoc}^\text{res},
 \end{equation}
 where
 \begin{equation} \label{eq:helm_res_srk}
-\bar{a}_{SRK}^{res} = -RT\ln(1-\rho b)-\frac{a}{b}\ln(1+\rho b)   
+\bar{a}_\text{SRK}^\text{res} = -RT\ln(1-\rho b)-\frac{a}{b}\ln(1+\rho b)   
 \end{equation}
 and
 \begin{equation} \label{eq:helm_res_assoc}
-\bar{a}_{assoc}^{res} = RT\sum_{i=1} x_{i} \sum_{A_{i}}\left(\ln X_{A_{i}} - \frac{X_{A_{i}}}{2} + \frac{1}{2}\right).
+\bar{a}_\text{assoc}^\text{res} = RT\sum_{i=1} x_{i} \sum_{A_{i}}\left(\ln X_{A_{i}} - \frac{X_{A_{i}}}{2} + \frac{1}{2}\right).
 \end{equation}
 %\end{subequations}
 
-In these equations, $\bar{a}$ is the molar Helmholtz free energy.
+In these equations, $\bar{a}^\text{res}$ is the residual molar Helmholtz free energy.
 The mixture parameters $a$ and $b$ are calculated using the van der Waals one-fluid mixing rule with the classical combining rules, that is,
 \begin{equation}
 a = \sum_{i=1}^{nc} \sum_{j=1}^{nc} x_{i}x_{j}\sqrt{a_{i}a_{j}}(1-k_{ij})
 \end{equation}
 and
 \begin{equation}
-b = \sum_{i=1}^{nc}x_{i}b_{i}
+b = \sum_{i=1}^{nc}x_{i}b_{i},
 \end{equation}
-where $k_{ij}$ is a binary interaction parameter (here considered as zero for all examples) and $nc$ is the number of components in the mixture.
-The energy parameter of each component $a_{i}$ is calculated using a Soave-type temperature dependency, which is
+where $k_{ij}$ is a binary interaction parameter (here considered as zero for all examples).
+The energy parameter of each component, $a_{i}$, is calculated using a Soave-type temperature dependency,
 \begin{equation}
-a_{i}(T) = a_{0_{i}}\left[1+c_{1_{i}}\left(1-\sqrt{\frac{T}{T_{c_{i}}}}\right)\right]^2
+a_{i}(T) = a_{0_{i}}\left[1+c_{1_{i}}\left(1-\sqrt{\frac{T}{T_{c_{i}}}}\right)\right]^2,
 \end{equation}
 where $a_{0_{i}}$, $b_{i}$, $c_{1_{i}}$ are parameters of the CPA equation.
-The last term of Eq.~\ref{eq:pressure_cpa} is the association term, in which $X_{A_{i}}$ represents the fractions of non-associated $A$ sites of the \textit{i}-th component, and can be calculated by
+The last term of Eq.~\ref{eq:pressure_cpa} is the association term, in which $X_{A_{i}}$ represents the fractions of non-associated type-$A$ sites of the \textit{i}-th component, calculated by
 \begin{equation} \label{eq:frac_nb}
-X_{A_{i}} = \left(1+\rho \sum_{j}x_{j} \sum_{B_{j}} X_{B_{j}} \Delta^{A_{i}B_{j}}\right)^{-1}
+X_{A_{i}} = \left(1+\rho \sum_{j}x_{j} \sum_{B_{j}} X_{B_{j}} \Delta^{A_{i}B_{j}}\right)^{-1},
 \end{equation}
 in which $\Delta^{A_{i}B_{j}}$ is the association strength, given by
 \begin{equation} \label{eq:delta_cpa}
 \Delta^{A_{i}B_{j}} = g(\rho)\left[\exp\left(\frac{\epsilon^{A_{i}B_{j}}}{RT}\right)-1\right]b_{ij}\beta^{A_{i}B_{j}},
 \end{equation}
-with
-\begin{equation} \label{eq:bij}
-b_{ij} = \left(\frac{b_{i}+b{j}}{2}\right)
-\end{equation}
-\begin{equation} \label{eq:g_cpa}
-g(\rho) = \frac{1}{1-1.9\eta}, \quad \text{and}
-\end{equation}
-\begin{equation} \label{eq:eta_cpa}
-\eta = \frac{b\rho}{4}
-\end{equation}
-where $\beta_{i}^{A_{i}B_{j}}$ and $\epsilon_{i}^{A_{i}B_{j}}$ are the association parameters of the CPA equation, $g(\rho)$ is the contact value of the radial distribution function and $\eta$ is the packing fraction.
-The version of the CPA equation of state presented here is commonly referred to in the literature as the simplified-CPA (s-CPA) equation \citep{kontogeorgis1999multicomponent}, but in this work we will simply use the term CPA for simplicity.
+%with
+%\begin{equation} \label{eq:bij}
+%b_{ij} = \frac{b_{i}+b_{j}}{2}
+%\end{equation}
+%\begin{equation} \label{eq:g_cpa}
+%g(\rho) = \frac{1}{1-1.9\eta}, \quad \text{and}
+%\end{equation}
+%\begin{equation} \label{eq:eta_cpa}
+%\eta = \frac{b\rho}{4}
+%\end{equation}
+with $b_{ij} = \frac{b_{i}+b_{j}}{2}$, $g(\rho) = \frac{1}{1-1.9\eta}$, and $\eta = \frac{b\rho}{4}$,
+where $\beta_{i}^{A_{i}B_{j}}$ and $\epsilon_{i}^{A_{i}B_{j}}$ are the association parameters of the CPA equation, $g(\rho)$ is the contact-value of the radial distribution function, and $\eta$ is the packing fraction.
+The version of the CPA equation of state presented here is commonly referred to in the literature as the simplified CPA (s-CPA) equation \citep{kontogeorgis1999multicomponent}, but in this work we will simply use the term CPA for simplicity.
+\pdfcomment[author=Charlles]{Seria conveniente dizer qual é a simplificação em relação à CPA original}
 In this work, $X_{A_{i}}$ is calculated following the numerical procedure proposed by Michelsen \textit{et al}.
  \citep{michelsen2006robust}.
 
