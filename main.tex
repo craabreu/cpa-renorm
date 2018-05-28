@@ -203,13 +203,24 @@ in which $\Delta^{A_{i}B_{j}}$ is the association strength, given by
 %\end{equation}
 with $b_{ij} = \frac{b_{i}+b_{j}}{2}$, $g(\rho) = \frac{1}{1-1.9\eta}$, and $\eta = \frac{b\rho}{4}$,
 where $\beta_{i}^{A_{i}B_{j}}$ and $\epsilon_{i}^{A_{i}B_{j}}$ are the association parameters of the CPA equation, $g(\rho)$ is the contact-value of the radial distribution function, and $\eta$ is the packing fraction.
-The version of the CPA equation of state presented here is commonly referred to in the literature as the simplified CPA (s-CPA) equation \citep{kontogeorgis1999multicomponent}, but in this work we will simply use the term CPA for simplicity.
-\pdfcomment[author=Charlles]{Seria conveniente dizer qual é a simplificação em relação à CPA original}
+The version of the CPA equation of state presented here is commonly referred to in the literature as the simplified CPA (s-CPA) equation \citep{kontogeorgis1999multicomponent}, because of the substitution of the hard sphere radial distribution function, given by
+
+\begin{equation} \label{eq:g(r)}
+g(\rho) = \frac{2-\eta}{2-\left(1-\eta\right)^{3}} ,
+\end{equation}
+
+for a simplified radial distribution function, given by
+
+\begin{equation} \label{eq:gs(r)}
+g(\rho) = \frac{1}{1-1.9\eta} ,
+\end{equation}
+
+
+but in this work we will simply use the term CPA for simplicity.
 In this work, $X_{A_{i}}$ is calculated following the numerical procedure proposed by Michelsen \textit{et al}.
  \citep{michelsen2006robust}.
 
-The recursive method developed by White and Zhang \cite{white1993renormalization, white1995renormalization, white1998renormalization} and by Salvino and White \citep{salvino1992calculation} introduces density fluctuations to \hl{a given framework} of Helmholtz energy density.
-\pdfcomment[author=Charlles]{A expressão "a given framework" é vaga. Deveríamos trocá-la por uma expressão mais precisa.}
+The recursive method developed by White and Zhang \cite{white1993renormalization, white1995renormalization, white1998renormalization} and by Salvino and White \citep{salvino1992calculation} introduces density fluctuations to a specified grid of Helmholtz energy density.
 The method is based on the phase space cell approximation developed by Wilson \cite{wilson1971renormalization, wilson1971brenormalization}, where each iteration accounts for fluctuations of longer and longer wavelengths.
 This introduces a non-analytic correction to the analytical equation of state.
 An illustration of the method is represented in Fig.~\ref{fig:schematics}.
@@ -227,8 +238,8 @@ Firstly, the interaction potential $u(r)$ is considered to be divided into two m
 \begin{equation} \label{eq:u(r)}
 u(r) = u_\text{ref}(r) + u_\text{pert}(r).
 \end{equation}
-%where $u(r)$ is the interaction potential, $u_\text{ref}(r)$ is the reference contribution, and $u_\text{pert}(r)$ is the perturbation contribution.
-\pdfcomment[author=Charlles]{Aqui não está claro o que r significa exatamente. Isso também tem implicações em outras equações a seguir.}
+where $u(r)$ is the interaction potential, $u_\text{ref}(r)$ is the reference contribution, and $u_\text{pert}(r)$ is the perturbation contribution. With $r$ being the center-to-center molecular distance in cartesian coordinates, considering the interaction potential to be spherically symmetric.
+\pdfcomment[author=Gabriel]{Este r é a distância entre duas partículas em coordenadas cartesianas, entretanto, na gênese do método se considera que o potencial no qual as partículas interagem é esfericamente simétrico, deve-se incluir também esta informação?}
 
 Considering that the repulsive part of the potential accounts only for very-short-wavelength fluctuations and that the perturbation part takes into account both short- and long-wavelength fluctuations, the renormalization method is applied only to the attractive part.
 Mean-field theories are considered to provide a good approximation for the short-range repulsions and fluctuations smaller than a given cutoff length $L$.
@@ -236,7 +247,7 @@ The integral responsible for accounting for the short-wavelength fluctuations is
 \begin{equation} \label{eq:Fs}
 F_{s}(\rho) = \int f^\text{EoS} dr,
 \end{equation}
-\pdfcomment[author=Charlles]{Mais uma vez, a coordenada r não está devidamente identificada.}
+
 where $f^\text{EoS}$ is the Helmholtz free energy density calculated using the mean-field theory (in this work, the CPA equation of state), thus
 \begin{equation} \label{eq:f_to_a}
 %f^{EoS} = \frac{\bar{a}^{EoS}}{v}.
@@ -326,7 +337,7 @@ There is a large discussion on the literature on the most adequate associating m
 A common example is whether \ce{CO_2} should actually be considered as an associating molecule and, furthermore, whether the extent of quadrupole forces is important \cite{tsivintzelis2011modeling,bjorner2016modeling}.
 
 The parameters for all substances are summarized in \cref{table:CPA_parameters}.
-For all cases, the \mbox{CR-1} combination rule is considered for the association parameters (comprised of arithmetic mean for the cross-association energy and geometric mean for the cross-association volume).
+For all cases, the \mbox{CR-1} combination rule is considered for the association parameters (comprised of arithmetic mean for the cross-association energy and geometric mean for the cross-association volume), because of its success in a good range of applications \cite{folas2005application,folas2006application,kontogeorgis2006ten1,kontogeorgis2006ten2}.
 Cross-association is considered in cases where both substances are associating ones.
 The critical properties for each substance are shown in \cref{table:crit_exp}.
 The terminology for the association models follows that of Huang and Radosz \cite{huang1990equation}.
