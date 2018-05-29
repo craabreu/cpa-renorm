@@ -164,18 +164,18 @@ where
 \end{equation}
 and
 \begin{equation} \label{eq:helm_res_assoc}
-\bar{a}_\text{assoc}^\text{res} = RT\sum_{i=1} x_{i} \sum_{A_{i}}\left(\ln X_{A_{i}} - \frac{X_{A_{i}}}{2} + \frac{1}{2}\right).
+\bar{a}_\text{assoc}^\text{res} = RT\sum_{i=1}^{n_c} x_{i} \sum_{A_{i}}\left(\ln X_{A_{i}} - \frac{X_{A_{i}}}{2} + \frac{1}{2}\right).
 \end{equation}
 %\end{subequations}
 
 In these equations, $\bar{a}^\text{res}$ is the residual molar Helmholtz free energy.
 The mixture parameters $a$ and $b$ are calculated using the van der Waals one-fluid mixing rule with the classical combining rules, that is,
 \begin{equation}
-a = \sum_{i=1}^{nc} \sum_{j=1}^{nc} x_{i}x_{j}\sqrt{a_{i}a_{j}}(1-k_{ij})
+a = \sum_{i=1}^{n_c} \sum_{j=1}^{n_c} x_{i}x_{j}\sqrt{a_{i}a_{j}}(1-k_{ij})
 \end{equation}
 and
 \begin{equation}
-b = \sum_{i=1}^{nc}x_{i}b_{i},
+b = \sum_{i=1}^{n_c}x_{i}b_{i},
 \end{equation}
 where $k_{ij}$ is a binary interaction parameter (here considered as zero for all examples).
 The energy parameter of each component, $a_{i}$, is calculated using a Soave-type temperature dependency,
@@ -185,40 +185,16 @@ a_{i}(T) = a_{0_{i}}\left[1+c_{1_{i}}\left(1-\sqrt{\frac{T}{T_{c_{i}}}}\right)\r
 where $a_{0_{i}}$, $b_{i}$, $c_{1_{i}}$ are parameters of the CPA equation.
 The last term of Eq.~\ref{eq:pressure_cpa} is the association term, in which $X_{A_{i}}$ represents the fractions of non-associated type-$A$ sites of the \textit{i}-th component, calculated by
 \begin{equation} \label{eq:frac_nb}
-X_{A_{i}} = \left(1+\rho \sum_{j}x_{j} \sum_{B_{j}} X_{B_{j}} \Delta^{A_{i}B_{j}}\right)^{-1},
+X_{A_{i}} = \left(1+\rho \sum_{j=1}^{n_c} x_{j} \sum_{B_{j}} X_{B_{j}} \Delta^{A_{i}B_{j}}\right)^{-1},
 \end{equation}
 in which $\Delta^{A_{i}B_{j}}$ is the association strength, given by
 \begin{equation} \label{eq:delta_cpa}
 \Delta^{A_{i}B_{j}} = g(\rho)\left[\exp\left(\frac{\epsilon^{A_{i}B_{j}}}{RT}\right)-1\right]b_{ij}\beta^{A_{i}B_{j}},
 \end{equation}
-%with
-%\begin{equation} \label{eq:bij}
-%b_{ij} = \frac{b_{i}+b_{j}}{2}
-%\end{equation}
-%\begin{equation} \label{eq:g_cpa}
-%g(\rho) = \frac{1}{1-1.9\eta}, \quad \text{and}
-%\end{equation}
-%\begin{equation} \label{eq:eta_cpa}
-%\eta = \frac{b\rho}{4}
-%\end{equation}
-with $b_{ij} = \frac{b_{i}+b_{j}}{2}$, $g(\rho) = \frac{1}{1-1.9\eta}$, and $\eta = \frac{b\rho}{4}$,
-where $\beta_{i}^{A_{i}B_{j}}$ and $\epsilon_{i}^{A_{i}B_{j}}$ are the association parameters of the CPA equation, $g(\rho)$ is the contact-value of the radial distribution function, and $\eta$ is the packing fraction.
-The version of the CPA equation of state presented here is commonly referred to in the literature as the simplified CPA (s-CPA) equation \citep{kontogeorgis1999multicomponent}, because of the substitution of the hard sphere radial distribution function, given by
-
-\begin{equation} \label{eq:g(r)}
-g(\rho) = \frac{2-\eta}{2-\left(1-\eta\right)^{3}} ,
-\end{equation}
-
-for a simplified radial distribution function, given by
-
-\begin{equation} \label{eq:gs(r)}
-g(\rho) = \frac{1}{1-1.9\eta} ,
-\end{equation}
-
-
-but in this work we will simply use the term CPA for simplicity.
-In this work, $X_{A_{i}}$ is calculated following the numerical procedure proposed by Michelsen \textit{et al}.
- \citep{michelsen2006robust}.
+with $b_{ij} = \frac{b_{i}+b_{j}}{2}$ and where $\beta_{i}^{A_{i}B_{j}}$ and $\epsilon_{i}^{A_{i}B_{j}}$ are the association parameters of the CPA equation, $g(\rho)$ is the contact-value of the radial distribution function. Here we employ the approximate hard-sphere expression $g(\rho) = \frac{1}{1-1.9\eta}$, where $\eta = \frac{b\rho}{4}$ is the packing fraction.
+\pdfcomment[author=Charlles]{Aqui deveria ser b_{ij} no lugar de b?}
+Thus, the version of the CPA equation presented here is the one commonly referred to in the literature as simplified CPA (s-CPA) \citep{kontogeorgis1999multicomponent}. However, we will simply use the term CPA for simplicity.
+In this work, $X_{A_{i}}$ is calculated following the numerical procedure proposed by Michelsen \textit{et al}. \cite{michelsen2006robust}.
 
 The recursive method developed by White and Zhang \cite{white1993renormalization, white1995renormalization, white1998renormalization} and by Salvino and White \citep{salvino1992calculation} introduces density fluctuations to a specified grid of Helmholtz energy density.
 The method is based on the phase space cell approximation developed by Wilson \cite{wilson1971renormalization, wilson1971brenormalization}, where each iteration accounts for fluctuations of longer and longer wavelengths.
@@ -239,7 +215,10 @@ Firstly, the interaction potential $u(r)$ is considered to be divided into two m
 u(r) = u_\text{ref}(r) + u_\text{pert}(r).
 \end{equation}
 where $u(r)$ is the interaction potential, $u_\text{ref}(r)$ is the reference contribution, and $u_\text{pert}(r)$ is the perturbation contribution. With $r$ being the center-to-center molecular distance in cartesian coordinates, considering the interaction potential to be spherically symmetric.
-\pdfcomment[author=Gabriel]{Este r é a distância entre duas partículas em coordenadas cartesianas, entretanto, na gênese do método se considera que o potencial no qual as partículas interagem é esfericamente simétrico, deve-se incluir também esta informação?}
+
+\hl{Gabriel: Este r é a distância entre duas partículas em coordenadas cartesianas, entretanto, na gênese do método se considera que o potencial no qual as partículas interagem é esfericamente simétrico, deve-se incluir também esta informação?
+	
+Charlles: É por isso que estranho a ausência de um termo $4\pi r^2$ nas integrais definidas abaixo. Eu esperaria uma integração feita no volume, o que em coordenadas esféricas dependeria de r, phi e theta. Porém, a consideração de interação esfericamente simétrica faria com que a integração em phi e theta pudesse ser feita analiticamente, resultando em $4\pi r^2$.}
 
 Considering that the repulsive part of the potential accounts only for very-short-wavelength fluctuations and that the perturbation part takes into account both short- and long-wavelength fluctuations, the renormalization method is applied only to the attractive part.
 Mean-field theories are considered to provide a good approximation for the short-range repulsions and fluctuations smaller than a given cutoff length $L$.
@@ -247,7 +226,6 @@ The integral responsible for accounting for the short-wavelength fluctuations is
 \begin{equation} \label{eq:Fs}
 F_{s}(\rho) = \int f^\text{EoS} dr,
 \end{equation}
-
 where $f^\text{EoS}$ is the Helmholtz free energy density calculated using the mean-field theory (in this work, the CPA equation of state), thus
 \begin{equation} \label{eq:f_to_a}
 %f^{EoS} = \frac{\bar{a}^{EoS}}{v}.
@@ -259,82 +237,88 @@ This leads to the approximation
 \begin{equation} \label{eq:f01}
 f_{0}(\rho) = f^{EoS} + \alpha\rho^2,
 \end{equation}
-where $\alpha$ is the interaction volume, in units of energy volume, given by
+where $\alpha$ is the interaction volume, in units of \hl{energy volume}, given by
+\pdfcomment[author=Charlles]{A unidade de alpha teria que ser (energia/volume)*(volume/mol)^2 = energia*volume/mol^2, não?}
 \begin{equation} \label{eq:alphav}
 \alpha = -\frac{1}{2} \int u_\text{att} dr,
 \end{equation}
 where $u_\text{att}$ is the attractive part of the potential.
-Since there is no explicit potential for the CPA equation of state, considering previous work with both the SRK and CPA equations of state \cite{cai2004thermodynamics,pcm2017application,xu2010crossover}, the attractive part of the potential is correlated to half of the $a$ term, which here is considered an approximation to the contribution of the attractive part of the potential (divided by the volume) to the Helmholtz free energy density, leading to 
+Since there is no explicit potential for the CPA equation of state, considering previous work with both the SRK and CPA equations of state \cite{cai2004thermodynamics, pcm2017application, xu2010crossover}, the attractive part of the potential is correlated to half of parameter $a$, which here is considered as an approximation to the contribution of the attractive part of the potential (divided by the volume) to the Helmholtz free energy density.
+This leads us to
+\pdfcomment[author=Charlles]{Aqui não deveria haver o subscrito 0 no parâmetro a, certo?}
 \begin{equation} \label{eq:arho2}
 \alpha\rho^2 = \frac{1}{2}a_{0}\rho^2.
 \end{equation}
 
-The Helmholtz free energy corresponding to the zero-order solution ($f_{0}$) is given by the mean-field theory subtracted by the approximated attractive term.
+The Helmholtz free energy corresponding to the zero-order solution ($f_{0}$) is given by the mean-field theory result subtracted by the approximated attractive term.
 Combining \cref{eq:helm_res_cpa,eq:f_to_a,eq:f01,eq:arho2}, the Helmholtz free energy density zero-order solution is
 \begin{equation} \label{eq:f00}
-f_{0}(\rho) = \rho RT\ln\left(\frac{\rho}{1-\rho b}\right)-\frac{a\rho}{b}\ln(1+\rho b) + \rho RT\sum_{i=1} x_{i} \sum_{A_{i}}\left(\ln X_{A_{i}} - \frac{X_{A_{i}}}{2} + \frac{1}{2}\right) + \frac{1}{2} a\rho^2.
+f_{0}(\rho) = \rho RT\ln\left(\frac{\rho}{1-\rho b}\right)-\frac{a\rho}{b}\ln(1+\rho b) + \rho RT\sum_{i=1}^{n_c} x_{i} \sum_{A_{i}}\left(\ln X_{A_{i}} - \frac{X_{A_{i}}}{2} + \frac{1}{2}\right) + \frac{1}{2} a\rho^2.
 \end{equation}  
 
-The Phase Space Cell Approximation method consists on adding the effect of long-range fluctuations through recursive steps, thus correcting the influence of the long-range interactions over the Helmholtz free energy density on the mean-field solution.
-In this work, the equation derived from the above procedures and used to calculate these corrections is
+The phase space cell approximation method consists in adding the effect of long-range fluctuations through recursive steps, thus correcting the influence of the long-range interactions on the Helmholtz free energy density of the mean-field solution.
+In this work, the equation derived from the procedures above and used to calculate these corrections is
 \begin{equation} \label{eq:fn}
 f_{n}(\rho) = df_{n}(\rho) + f_{n-1}(\rho),
 \end{equation}
-with $df_{n}(\rho)$ being the change in Helmholtz free energy density, given by
+with $df_{n}(\rho)$ being the change in Helmholtz free energy density at iteration $n$, given by
 \begin{equation} \label{eq:dfn}
-df_{n}(\rho) = -K_{n} ln\left[\frac{\Omega_{n}^{s}(\rho)}{\Omega_{n}^{l}(\rho)}\right],
+df_{n}(\rho) = -K_{n} \ln\left[\frac{\Omega_{n}^{s}(\rho)}{\Omega_{n}^{l}(\rho)}\right],
 \end{equation}
-where $\Omega_{n}^{s}$ is the density of short-wavelengths fluctuations and $\Omega_{n}^{l}$ is the density of long-wavelengths fluctuations.
-The coefficient $K_{n}$ is calculated from
-\begin{equation} \label{eq:Kn}
-K_{n} = \frac{k_{b}T}{(2^{n}L)^3},
-\end{equation}
-where $k_{b}$ is the Boltzmann constant and $L$ is the cutoff length.
-The density of fluctuations can be calculated from
+where $K_{n} = \frac{k_{b}T}{(2^{n}L)^3}$, with $k_{b}$ being the Boltzmann constant,
+$\Omega_{n}^{s}$ is the density of short-wavelengths fluctuations, and
+$\Omega_{n}^{l}$ is the density of long-wavelengths fluctuations.
+These can be obtained from
 \begin{equation} \label{eq:Omega}
 \Omega_{n}^{\gamma} = \int_{0}^{\min(\rho,\rho_{\max}-\rho)}\exp\left[-\frac{G_{n}^{\gamma}(\rho,x)}{K_{n}}\right]dx \qquad  \gamma = s,l
 \end{equation}
 with
 \begin{equation} \label{eq:Gn}
-G_{n}^{\gamma}(\rho) = \frac{f_{n}^{\gamma}(\rho+x)-2f_{n}^{\gamma}(\rho)+f_{n}^{\gamma}(\rho-x)}{2} \qquad \gamma = s,l
+G_{n}^{\gamma}(\rho) = \frac{f_{n}^{\gamma}(\rho+x)-2f_{n}^{\gamma}(\rho)+f_{n}^{\gamma}(\rho-x)}{2} \qquad \gamma = s,l,
 \end{equation}
-where $f_{n}^{s}$ and $f_{n}^{l}$ are modified Helmholtz free energy terms, related to short-wavelength fluctuations and long-wavelength fluctuations, respectively.
+where $f_{n}^{s}$ and $f_{n}^{l}$ are the modified Helmholtz free energy terms related to short-wavelength and long-wavelength fluctuations, respectively.
 They are computed by
 \begin{equation} \label{eq:fns}
 f_{n}^{s} = f_{n-1} + \frac{\alpha \rho^2 \phi}{2^{2n}}
 \end{equation}
+\pdfcomment[author=Charlles]{Esse phi aparece do nada, sem uma devida descrição. É necessário dizer que tanto phi quanto L são parâmetros ajustáveis.}
 and
 \begin{equation} \label{eq:fnl}
 f_{n}^{l} = f_{n-1} + \alpha\rho^2.
 \end{equation}
 
-The final Helmholtz free energy density is calculated from
+The final Helmholtz free energy density is calculated as
+\pdfcomment[author=Charlles]{É necessário deixar mais claro de que artigo (ou artigos) esse equacionamento foi retirado}
 \begin{equation} \label{eq:ff}
 f = \lim_{n \rightarrow \infty} f_{n} - \alpha\rho^2.
 \end{equation}
-  
-Here we considered $f_{5}$ to be the final Helmholtz free energy density (based on results to presented on section 5).
+
+Here we considered $f_{5}$ to be the final Helmholtz free energy density (based on results to be presented on \cref{sec:pure-substance phase equilibrium results}).
 To apply the renormalization procedure to mixtures, two major modifications were made.
-First, the isomorphic approximation \citep{fisher1968renormalization} was used instead of the Phase Space Cell Approximation.
-The main difference between the two approximations is that the isomorphic approximation considers that the total density of the fluid is used to consider fluctuations, while the Phase Space Cell Approximation implies that each individual component in the mixture fluctuates independently.
-Second, as the isomorphism assumption requires the chemical potential be the isomorphic variable in the present case, which is not a common independent variable for mixture phase equilibrium modeling, following Kiselev and Friend \citep{kiselev1999cubic} we used mole fractions as isomorphic variables instead of the individual chemical potentials.
-These two approximations make possible to extend \cref{eq:f00,eq:fn,eq:dfn,eq:Kn,eq:Omega,eq:Gn,eq:fns,eq:fnl} with the need of only mixing rules [\cref{eq:mix_L,eq:mix_phi}] for the renormalization parameters, which are
+\pdfcomment[author=Charlles]{Essas modificações são propostas novas ou já foram publicadas por outros autores? Se for uma proposta nova, isso deve ser enfatizado.}
+First, the isomorphic approximation \citep{fisher1968renormalization} was used instead of the phase space cell approximation.
+The main difference between the two approximations is that the former considers that the total density of the fluid is used to consider fluctuations, while the latter implies that each individual component in the mixture fluctuates independently.
+Second, although the isomorphism assumption requires the chemical potential be the isomorphic variable in the present case, this is not a common independent variable for mixture phase equilibrium modeling.
+Thus, following Kiselev and Friend \citep{kiselev1999cubic}, we used mole fractions as isomorphic variables instead of the individual chemical potentials.
+These two approximations make possible to extend \cref{eq:f00,eq:fn,eq:dfn,eq:Omega,eq:Gn,eq:fns,eq:fnl} by simply defining mixing rules for the renormalization parameters, which are
 \begin{equation} \label{eq:mix_L}
-L = \sum_{i=1}^{nc}x_{i}L_{i}^{3}
+L = \sum_{i=1}^{n_c}x_{i}L_{i}^{3}
 \end{equation}
 and
 \begin{equation} \label{eq:mix_phi}
-\phi = \sum_{i=1}^{nc}x_{i}\phi_{i}.
+\phi = \sum_{i=1}^{n_c}x_{i}\phi_{i}.
 \end{equation}
 
-These approximations were used by other authors with good results \cite{cai2004thermodynamics,llovell2006global,sun2005application,pcm2017application,xu2011prediction}.
-Tang and Gross \citep{tang2010renormalization} compared the Phase Space Cell Approximation and Isomorphic Approximation using the PC-SAFT equation of state, and concluded that both present similar performances.
+Other authors have used these approximations and obtained good results \cite{cai2004thermodynamics, llovell2006global, sun2005application, pcm2017application, xu2011prediction}.
+\pdfcomment[author=Charlles]{Qual é a razão de os artigos de Kiselev não estarem citados nessa lista?}
+Tang and Gross \citep{tang2010renormalization} compared the phase space cell approximation and isomorphic approximation using the PC-SAFT equation of state, and concluded that both present similar performances.
 
 The substances analyzed here are n-butane, n-octane, methanol, ethanol, \ce{CO_2}, and \ce{H_{2}S}.
 These substances were chosen because of the different associative combinations that could be evaluated.
 n-Butane and \ce{CO_2} were considered as non-associative substances, while methanol, ethanol, and \ce{H_{2}S} are considered as associative ones.
 There is a large discussion on the literature on the most adequate associating models and considerations to represent these substances, mainly \ce{CO_2} \citep{bjorner2016modeling} and \ce{H_{2}S} \citep{ruffine2006represent}.
 A common example is whether \ce{CO_2} should actually be considered as an associating molecule and, furthermore, whether the extent of quadrupole forces is important \cite{tsivintzelis2011modeling,bjorner2016modeling}.
+\pdfcomment[author=Charlles]{Já que existe essa discussão, devemos justificar por que escolhemos considerar CO2 como não-associativo.}
 
 The parameters for all substances are summarized in \cref{table:CPA_parameters}.
 For all cases, the \mbox{CR-1} combination rule is considered for the association parameters (comprised of arithmetic mean for the cross-association energy and geometric mean for the cross-association volume), because of its success in a good range of applications \cite{folas2005application,folas2006application,kontogeorgis2006ten1,kontogeorgis2006ten2}.
@@ -376,7 +360,7 @@ Ethanol & 514.0  & 6.384& 6000  \\
 \end{tabular}}
 \end{table}
 
-After estimation of parameters L and $\phi$ in \cref{eq:fns,eq:Kn}, and calculation of the vapor-liquid phase envelope, the critical exponent $\beta$ was evaluated using a linear regression from
+For every substance, after estimation of parameters L and $\phi$ (such as described in \cref{sec:Parameter Estimation}) and calculation of the vapor-liquid phase envelope, the critical exponent $\beta$ was evaluated using a linear regression from
 \begin{equation} \label{eq:beta_law}
 \ln\left|\frac{\rho_\text{liq}-\rho_\text{vap}}{\rho_{c}}\right| = \beta \ln\left|\frac{T-T_{c}}{T_{c}}\right|+\text{const.} \qquad (T \rightarrow T_{c}).
 \end{equation}
@@ -398,6 +382,8 @@ As mentioned in the previous section, for mixtures, the total molar density of t
 Upon analyzing and determining the parameters related to the renormalization method for pure substances, phase equilibrium calculations for binary mixtures were carried out at a number of different conditions (both subcritical and critical) using the isofugacity method.
 
 \section{Parameter Estimation}
+\label{sec:Parameter Estimation}
+
 Both parameters related to the renormalization were considered to be adjustable.
 Therefore, both parameters were obtained by fitting densities and vapor pressures to experimental data using a single objective function, given as
 
@@ -437,7 +423,8 @@ The relation is explicit from the derivation of equation~\ref{eq:fns}, following
 Where $\psi$ is related to the initial shortest wavelength of the density fluctuations and $w$ is the range of the attractive potential.
 From~\ref{eq:fns_battle} it is clear that $\phi$ should correspond to some multiple of $L$.
 
-\section{Pure Substances Phase Equilibrium Results}
+\section{Pure-Substance Phase Equilibrium Results}
+\label{sec:pure-substance phase equilibrium results}
 
 To define the necessary number of iterations, we analyzed the evolution of pure substance vapor-liquid phase envelope and the $df_{n}$ for the whole density range.
 From Figures~\ref{fig:dfn} and~\ref{fig:PV_evol}, it is clear that the method converges in four to five iterations.
