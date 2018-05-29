@@ -214,11 +214,13 @@ Firstly, the interaction potential $u(r)$ is considered to be divided into two m
 \begin{equation} \label{eq:u(r)}
 u(r) = u_\text{ref}(r) + u_\text{pert}(r).
 \end{equation}
-where $u(r)$ is the interaction potential, $u_\text{ref}(r)$ is the reference contribution, and $u_\text{pert}(r)$ is the perturbation contribution. With $r$ being the center-to-center molecular distance in cartesian coordinates, considering the interaction potential to be spherically symmetric.
+where $u(r)$ is the interaction potential, $u_\text{ref}(r)$ is the reference contribution, and $u_\text{pert}(r)$ is the perturbation contribution, with $r$ being the center-to-center molecular distance in cartesian coordinates, considering the interaction potential to be spherically symmetric.
 
 \hl{Gabriel: Este r é a distância entre duas partículas em coordenadas cartesianas, entretanto, na gênese do método se considera que o potencial no qual as partículas interagem é esfericamente simétrico, deve-se incluir também esta informação?
 	
-Charlles: É por isso que estranho a ausência de um termo $4\pi r^2$ nas integrais definidas abaixo. Eu esperaria uma integração feita no volume, o que em coordenadas esféricas dependeria de r, phi e theta. Porém, a consideração de interação esfericamente simétrica faria com que a integração em phi e theta pudesse ser feita analiticamente, resultando em $4\pi r^2$.}
+Charlles: É por isso que estranho a ausência de um termo $4\pi r^2$ nas integrais definidas abaixo. Eu esperaria uma integração feita no volume, o que em coordenadas esféricas dependeria de r, phi e theta. Porém, a consideração de interação esfericamente simétrica faria com que a integração em phi e theta pudesse ser feita analiticamente, resultando em $4\pi r^2$.
+
+Charlles2: Já que você cita 'cartesian coordinates', o correto não seria center-to-center molecular distance vector? Isso significaria que a mudança para coordenadas esféricas e integração em phi e theta ainda não foi feita.}
 
 Considering that the repulsive part of the potential accounts only for very-short-wavelength fluctuations and that the perturbation part takes into account both short- and long-wavelength fluctuations, the renormalization method is applied only to the attractive part.
 Mean-field theories are considered to provide a good approximation for the short-range repulsions and fluctuations smaller than a given cutoff length $L$.
