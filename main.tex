@@ -247,9 +247,9 @@ where $\alpha$ is the interaction volume, in units of \hl{energy volume}, given 
 where $u_\text{att}$ is the attractive part of the potential.
 Since there is no explicit potential for the CPA equation of state, considering previous work with both the SRK and CPA equations of state \cite{cai2004thermodynamics, pcm2017application, xu2010crossover}, the attractive part of the potential is correlated to half of parameter $a$, which here is considered as an approximation to the contribution of the attractive part of the potential (divided by the volume) to the Helmholtz free energy density.
 This leads us to
-\pdfcomment[author=Charlles]{Aqui não deveria haver o subscrito 0 no parâmetro a, certo?}
+
 \begin{equation} \label{eq:arho2}
-\alpha\rho^2 = \frac{1}{2}a_{0}\rho^2.
+\alpha\rho^2 = \frac{1}{2}a\rho^2.
 \end{equation}
 
 The Helmholtz free energy corresponding to the zero-order solution ($f_{0}$) is given by the mean-field theory result subtracted by the approximated attractive term.
@@ -442,13 +442,7 @@ To be conservative and by following other authors  \cite{llovell2004thermodynami
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{figures/df_csv.png}}
-\caption{Helmholtz-free energy density corrections at each iteration of the renormalization method using the CPA+RG equation of state for methanol at 512.6~K.
-	\pdfcomment[author=Charlles]{Vejo vários problemas neste gráfico:
-		1) Os "labels" do eixo das densidades se sobrepõem. Recomendo usar notação científica ou alterar a unidade de medida (e.g. 10^3 mol/m^3).
-		2) Não há espaço entre "Densidade" e a abertura de parêntese.
-		3) O eixo das ordenadas está invertido (isto é, com valores mais negativos acima).
-		4) O índice para cada iteração é "n" em df, enquanto o índice que aparece na legenda é "i"}.
-	}
+\caption{Helmholtz-free energy density corrections at each iteration of the renormalization method using the CPA+RG equation of state for methanol at 512.6~K.}
 \label{fig:dfn}
 \end{figure}
 
@@ -472,9 +466,7 @@ Results concerning phase equilibrium calculations are summarized in \cref{fig:pu
 Lines are obtained from calculations with the CPA+RG (\fulline) and CPA (\dashedline) methods.
 Experimental data (symbols) were extracted from the NIST database \cite{nistfluids}.
 \pdfcomment[author=Charlles]{Problemas com esta figura:
-	1) Falta espaço antes de abrir parêntese com a unidade de medida.
 	2) Onde estão os resultados para etanol?
-	3) Por que não apresentar o ponto crítico com símbolo cheio, tal como no gráfico posterior?}
 }
 \label{fig:pure_LV}
 \end{figure}
