@@ -17,12 +17,12 @@ file6 = 'u_10_11_12_exp.csv'
 file7 = 'u_10_cpa.csv'
 file8 = 'u_11_12_cpa.csv'
 file9 = 'u_10_11_12_cparg.csv'
-x0label = r'$\rm Pressure (MPa)$'
-y0label = r'$\rm u (m/s)$'
-x1label = r'$\rm Pressure (MPa)$'
-y1label = r'$\rm u (m/s)$'
-x2label = r'$\rm Pressure (MPa)$'
-y2label = r'$\rm u (m/s)$'
+x0label = r'$\rm Pressure\ (MPa)$'
+y0label = r'$\rm u\ (m/s)$'
+x1label = r'$\rm Pressure\ (MPa)$'
+y1label = r'$\rm u\ (m/s)$'
+x2label = r'$\rm Pressure\ (MPa)$'
+y2label = r'$\rm u\ (m/s)$'
 
 #BEGIN u--------------------------------------------------------------
 #u exp tr 0.8 0.9 

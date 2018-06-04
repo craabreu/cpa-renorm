@@ -13,8 +13,8 @@ file2 = 'h2s_meth_298_cpa_cparg.csv'
 file3 = 'h2s_meth_448.csv'
 file4 = 'h2s_meth_448_cpa.csv'
 file5 = 'h2s_meth_448_cparg.csv'
-xlabel = r'$\rm x_{H_{2}S}$'
-ylabel = r'$\rm Pressure (MPa)$'
+xlabel = r'$\rm \mathit{x}_{H_{2}S}$'
+ylabel = r'$\rm Pressure\ (MPa)$'
 
 #298.15K exp
 df = pd.read_csv('%s' %file1,sep=';',header=None)

@@ -14,9 +14,9 @@ file2 = 'cv_08_cpa.csv'
 file3 = 'cv_09_cpa.csv'
 file4 = 'cv_08_cparg.csv'
 file5 = 'cv_09_cparg.csv'
-x0label = r'$\rm Pressure (MPa)$'
+x0label = r'$\rm Pressure\ (MPa)$'
 y0label = r'$\rm C_{v}^{res}/R$'
-x1label = r'$\rm Pressure (MPa)$'
+x1label = r'$\rm Pressure\ (MPa)$'
 y1label = r'$\rm C_{p}^{res}/R$'
 
 #BEGIN Cv--------------------------------------------------------------
@@ -117,7 +117,7 @@ CPARG_Cp9 = np.array(out[1]).astype(np.float)
 fig, ax = plt.subplots(1,2)
 
 #ax[0].set_aspect(aspect='auto', adjustable='box')
-ax[0].tick_params(direction='in',size=6,labelsize=16)
+ax[0].tick_params(direction='in',size=6,labelsize=12)
 ax[0].plot(P, cv8, 'o', markerfacecolor='none', markeredgecolor='black', markersize=6, label='Tr = 0.8')
 ax[0].plot(P, cv9, 's', markerfacecolor='none', markeredgecolor='black', markersize=6, label='Tr = 0.9')
 ax[0].plot(CPA_P8, CPA_Cv8, color='blue',   linewidth=1.0, linestyle='--',  label='i = 3')
@@ -140,7 +140,7 @@ ax[0].set_aspect((x1-x0)/(y1-y0))
 
 #plot 2 - Cp
 #ax[1].set_aspect(aspect='auto', adjustable='box')
-ax[1].tick_params(direction='in',size=6,labelsize=16)
+ax[1].tick_params(direction='in',size=6,labelsize=12)
 ax[1].plot(Pp, cp8, 'o', markerfacecolor='none', markeredgecolor='black', markersize=6, label='Tr = 0.8')
 ax[1].plot(Pp, cp9, 's', markerfacecolor='none', markeredgecolor='black', markersize=6, label='Tr = 0.9')
 ax[1].plot(CPA_Pp8, CPA_Cp8, color='blue',   linewidth=1.0, linestyle='--',  label='i = 3')

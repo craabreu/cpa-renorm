@@ -21,8 +21,8 @@ file2cr = 'co2_cparg.csv'
 file3cr = 'h2s_cparg.csv'
 file4cr = 'c4_cparg.csv'
 fileexp = 'critexp_pt.csv'
-xlabel = r'$\rm Temperature (K)$'
-ylabel = r'$\rm Pressure (MPa)$'
+xlabel = r'$\rm Temperature\ (K)$'
+ylabel = r'$\rm Pressure\ (MPa)$'
 
 #methanol exp
 df = pd.read_csv('%s' %file1,sep=';',header=None)

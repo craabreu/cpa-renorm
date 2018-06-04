@@ -15,7 +15,7 @@ from matplotlib.transforms import blended_transform_factory
 #plt.rc('font', **font)
 
 filename = 'df.csv'
-xlabel = r'$\rm Density\ (10^{3} mol/m^{3})$'
+xlabel = r'$\rm Density\ (mol/L)$'
 ylabel = r'$\rm d\mathit{f_{n}}$'
 
 #Read values
@@ -51,7 +51,7 @@ plt.plot(x0, y4, color='cyan', linewidth=1.0, linestyle='-',  label='n = 5')
 #plt.plot(x0, y6, color='darkgrey', linewidth=1.0, linestyle='-.',  label='i = 7')
 #plt.plot(x0, y6, color='silver', linewidth=1.0, linestyle='-',  label='i = 8')
 
-plt.legend()
+plt.legend(loc='best')
 ax.set_xlabel(xlabel, fontsize=26)
 ax.set_ylabel(ylabel, fontsize=26)
 ax.yaxis.set_ticks_position('both')

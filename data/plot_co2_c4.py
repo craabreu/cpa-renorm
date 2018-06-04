@@ -13,8 +13,8 @@ file2 = 'co2_c4_260_cpa_cparg.csv'
 file3 = 'co2_c4_344.csv'
 file4 = 'co2_c4_344_cpa.csv'
 file5 = 'co2_c4_344_cparg.csv'
-xlabel = r'$\rm x_{CO_{2}}$'
-ylabel = r'$\rm Pressure (MPa)$'
+xlabel = r'$\rm \mathit{x}_{CO_{2}}$'
+ylabel = r'$\rm Pressure\ (MPa)$'
 
 #260.15K exp
 df = pd.read_csv('%s' %file1,sep=';',header=None)

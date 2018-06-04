@@ -10,8 +10,8 @@ from matplotlib.transforms import blended_transform_factory
 
 file1 = 'isot_exp.csv'
 file2 = 'isot_cpa_cparg.csv'
-xlabel = r'$\rm Density (mol/m^{3})$'
-ylabel = r'$\rm Pressure (MPa)$'
+xlabel = r'$\rm Density\ (mol/L)$'
+ylabel = r'$\rm Pressure\ (MPa)$'
 
 #Read values - exp values
 df = pd.read_csv('%s' %file1,sep=';',header=None)
@@ -21,9 +21,9 @@ out.append(df[:][1].values.tolist())
 out.append(df[:][2].values.tolist())
 out.append(df[:][3].values.tolist())
 P0 = np.array(out[0]).astype(np.float)
-rho0 = np.array(out[1]).astype(np.float)
+rho0 = np.array(out[1]).astype(np.float)/1e3
 P1 = np.array(out[2]).astype(np.float)
-rho1 = np.array(out[3]).astype(np.float)
+rho1 = np.array(out[3]).astype(np.float)/1e3
 
 #Read values - calc values
 df = pd.read_csv('%s' %file2,sep=';',header=None)
@@ -37,13 +37,13 @@ out.append(df[:][5].values.tolist())
 out.append(df[:][6].values.tolist())
 out.append(df[:][7].values.tolist())
 CPA_P0 = np.array(out[0]).astype(np.float)
-CPA_rho0 = np.array(out[1]).astype(np.float)
+CPA_rho0 = np.array(out[1]).astype(np.float)/1e3
 CPARG_P0 = np.array(out[2]).astype(np.float)
-CPARG_rho0 = np.array(out[3]).astype(np.float)
+CPARG_rho0 = np.array(out[3]).astype(np.float)/1e3
 CPA_P1 = np.array(out[4]).astype(np.float)
-CPA_rho1 = np.array(out[5]).astype(np.float)
+CPA_rho1 = np.array(out[5]).astype(np.float)/1e3
 CPARG_P1 = np.array(out[6]).astype(np.float)
-CPARG_rho1 = np.array(out[7]).astype(np.float)
+CPARG_rho1 = np.array(out[7]).astype(np.float)/1e3
 
 #plot
 fig, ax = plt.subplots(1,1)
@@ -62,7 +62,7 @@ ax.set_ylabel(ylabel,fontsize=26)
 ax.yaxis.set_ticks_position('both')
 ax.xaxis.set_ticks_position('both')
 
-ax.set_xlim([0,20000])
+ax.set_xlim([0,20])
 ax.set_ylim([0,35])
 
 plt.ylabel(ylabel)
