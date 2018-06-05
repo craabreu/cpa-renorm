@@ -239,7 +239,7 @@ This leads to the approximation
 \begin{equation} \label{eq:f01}
 f_{0}(\rho) = f^{EoS} + \alpha\rho^2,
 \end{equation}
-where $\alpha$ is the interaction volume, in units of \hl{energy volume}, given by
+where $\alpha$ is the interaction volume, in units of \hl{$energy*volume/mol^{2}$}, given by
 \pdfcomment[author=Charlles]{A unidade de alpha teria que ser (energia/volume)*(volume/mol)^2 = energia*volume/mol^2, não?}
 \begin{equation} \label{eq:alphav}
 \alpha = -\frac{1}{2} \int u_\text{att} dr,
@@ -280,13 +280,19 @@ G_{n}^{\gamma}(\rho) = \frac{f_{n}^{\gamma}(\rho+x)-2f_{n}^{\gamma}(\rho)+f_{n}^
 \end{equation}
 where $f_{n}^{s}$ and $f_{n}^{l}$ are the modified Helmholtz free energy terms related to short-wavelength and long-wavelength fluctuations, respectively.
 They are computed by
-\begin{equation} \label{eq:fns}
-f_{n}^{s} = f_{n-1} + \frac{\alpha \rho^2 \phi}{2^{2n}}
+
+\begin{equation} \label{eq:fns_battle}
+f_{n}^{s} = f_{n-1} + \frac{\alpha \rho^2}{2^{2n}}\left(\frac{\psi w^2}{2L^2}\right)
 \end{equation}
-\pdfcomment[author=Charlles]{Esse phi aparece do nada, sem uma devida descrição. É necessário dizer que tanto phi quanto L são parâmetros ajustáveis.}
 and
 \begin{equation} \label{eq:fnl}
-f_{n}^{l} = f_{n-1} + \alpha\rho^2.
+f_{n}^{l} = f_{n-1} + \alpha\rho^2,
+\end{equation}
+where $w$ is the range of the attractive potential, $psi$ is the average gradient of the wavelet chosen for renormalization, which doesn't depends on the interaction potential.
+Since the attractive potential for the CPA EoS is not clear, we followed other authors in considering the whole term $\left(\frac{\psi w^2}{2L^2}\right)$ in \cref{eq:fns} as an adjustable parameter $phi$, leading to
+
+\begin{equation} \label{eq:fns}
+f_{n}^{s} = f_{n-1} + \frac{\alpha \rho^2 \phi}{2^{2n}}
 \end{equation}
 
 The final Helmholtz free energy density is calculated as
@@ -297,7 +303,6 @@ f = \lim_{n \rightarrow \infty} f_{n} - \alpha\rho^2.
 
 Here we considered $f_{5}$ to be the final Helmholtz free energy density (based on results to be presented on \cref{sec:pure-substance phase equilibrium results}).
 To apply the renormalization procedure to mixtures, two major modifications were made.
-\pdfcomment[author=Charlles]{Essas modificações são propostas novas ou já foram publicadas por outros autores? Se for uma proposta nova, isso deve ser enfatizado.}
 First, the isomorphic approximation \citep{fisher1968renormalization} was used instead of the phase space cell approximation.
 The main difference between the two approximations is that the former considers that the total density of the fluid is used to consider fluctuations, while the latter implies that each individual component in the mixture fluctuates independently.
 Second, although the isomorphism assumption requires the chemical potential be the isomorphic variable in the present case, this is not a common independent variable for mixture phase equilibrium modeling.
@@ -311,8 +316,7 @@ and
 \phi = \sum_{i=1}^{n_c}x_{i}\phi_{i}.
 \end{equation}
 
-Other authors have used these approximations and obtained good results \cite{cai2004thermodynamics, llovell2006global, sun2005application, pcm2017application, xu2011prediction}.
-\pdfcomment[author=Charlles]{Qual é a razão de os artigos de Kiselev não estarem citados nessa lista?}
+Other authors have used these approximations within the White and Zhang approach \cite{white1993renormalization} and obtained good results \cite{cai2004thermodynamics, llovell2006global, sun2005application, pcm2017application, xu2011prediction}.
 Tang and Gross \citep{tang2010renormalization} compared the phase space cell approximation and isomorphic approximation using the PC-SAFT equation of state, and concluded that both present similar performances.
 
 The substances analyzed here are n-butane, n-octane, methanol, ethanol, \ce{CO_2}, and \ce{H_{2}S}.
@@ -394,8 +398,9 @@ O.F.=\sum_{i=1}^{n_\text{exp}}\left[ \left(\frac{\rho_{i}^\text{liq,exp}-\rho_{i
 \end{equation}
 
 Saturation pressure, saturated vapor density, and saturated liquid density were used in the temperature range from near-critical conditions to the critical point ($T_r=0.98$ to $T_r=1.0$).
-Both liquid and vapor densities were included in order to \hl{assure} that the fitted parameters would obey the critical exponent $\beta$ given by \cref{eq:beta_law}.
-\pdfcomment[author=Charlles]{Não é possível garantir que o expoente crítico será obedecido.}
+Both liquid and vapor densities were included.
+Many different approaches were used in the literature (a good review on this subject can be found in Bymaster \textit{et al}. \cite{bymaster2008renormalization}) to estimate these parameters, however, as to have a first evaluation of both parameters for the CPA EoS, we decided to fit both parameters.
+
 A Particle Swarm Optimization algorithm was used to find the minimum of the objective function.
 The obtained parameters are summarized in \cref{table:renorm_param}.
 
@@ -416,26 +421,13 @@ The obtained parameters are summarized in \cref{table:renorm_param}.
 	}
 \end{table}
 
-We observed that the parameters $L$ and $\phi$ present a strong correlation, meaning that several combinations of them give similar results.
-A good review on this subject can be found in Bymaster \textit{et al}.
-\cite{bymaster2008renormalization}.
-The relation is explicit from the derivation of \cref{eq:fns}, following Battle \cite{battlerenorm}, the $\phi$ parameter comes from
-\pdfcomment[author=Charlles]{Não entendi o parágrafo. É necessário reescrevê-lo.}
-\begin{equation} \label{eq:fns_battle}
-\phi = \frac{\psi w^2}{2L^2},
-\end{equation}
-where $\psi$ is related to the initial shortest wavelength of the density fluctuations and $w$ is \hl{the range of the attractive potential???}.
-From~\ref{eq:fns_battle} \hl{it is clear???} that $\phi$ should correspond to some multiple of $L$.
-\pdfcomment[author=Charlles]{Não adianta apresentar essa informação sem relacionar com o que foi feito aqui. Se a conclusão é que phi deveria ser proporcional a L, então deveríamos ter estimado 6 parâmetros no total, sendo 5 valores de L e mais a constante de proporcionalidade. Temos, então, que explicar por que isso não foi feito.}
-
 \section{Results}
 
 \subsection{Pure-Substance Phase Equilibrium}
 \label{sec:pure-substance phase equilibrium results}
 
 To define the number of iterations required for convergence, we analyzed the evolution of pure substance vapor-liquid phase envelope and the $df_{n}$ for the whole density range.
-From \cref{fig:dfn,fig:PV_evol}, \hl{it is clear that the method converges in four to five iterations}.
-\pdfcomment[author=Charlles]{Na verdade, deveríamos ser mais precisos, adotando um critério numérico para convergência. Esse critério "visual" depende da escala adotada para o gráfico.}
+From \cref{fig:dfn,fig:PV_evol}, from our results, we observed that after the fifth iteration, the calculated $df_{n}$ for the whole density range was in the order of $10^{-15}$, thus, we considered the method as converged.
 To be conservative and by following other authors  \cite{llovell2004thermodynamic, cai2004thermodynamics, pcm2017application}, the final Helmholtz free energy density we adopt here is $f_{5}$.
 
 \begin{figure}[h!]
