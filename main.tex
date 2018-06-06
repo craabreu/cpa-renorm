@@ -192,7 +192,7 @@ in which $\Delta^{A_{i}B_{j}}$ is the association strength, given by
 \Delta^{A_{i}B_{j}} = g(\rho)\left[\exp\left(\frac{\epsilon^{A_{i}B_{j}}}{RT}\right)-1\right]b_{ij}\beta^{A_{i}B_{j}},
 \end{equation}
 with $b_{ij} = \frac{b_{i}+b_{j}}{2}$ and where $\beta_{i}^{A_{i}B_{j}}$ and $\epsilon_{i}^{A_{i}B_{j}}$ are the association parameters of the CPA equation, $g(\rho)$ is the contact-value of the radial distribution function. Here we employ the approximate hard-sphere expression $g(\rho) = \frac{1}{1-1.9\eta}$, where $\eta = \frac{b\rho}{4}$ is the packing fraction.
-\pdfcomment[author=Charlles]{Aqui deveria ser b_{ij} no lugar de b?}
+
 Thus, the version of the CPA equation presented here is the one commonly referred to in the literature as simplified CPA (s-CPA) \citep{kontogeorgis1999multicomponent}. However, we will simply use the term CPA for simplicity.
 In this work, $X_{A_{i}}$ is calculated following the numerical procedure proposed by Michelsen \textit{et al}. \cite{michelsen2006robust}.
 
@@ -209,7 +209,8 @@ An illustration of the method is represented in Fig.~\ref{fig:schematics}.
 \label{fig:schematics}
 \end{figure}
 
-The renormalization group theory as introduced by White and Zhang \cite{white1993renormalization} and further developed by Lue and Prausnitz \cite{lue1998renormalization, lue1998brenormalization} is based on a transformation of the grand canonical partition function into a functional integral.
+The renormalization group theory as introduced by White and co-workers \cite{white1993renormalization,white1995renormalization,white1998renormalization} and further developed by Lue and Prausnitz \cite{lue1998renormalization, lue1998brenormalization} is based on a transformation of the grand canonical partition function into a functional integral.
+To note, in this work we used the derivation provided by White and co-workers \cite{white1993renormalization,white1995renormalization,white1998renormalization}, and applied successfully by other authors for cubic-EoS \cite{cai2006vapor,pcm2017application,xu2010crossover,xu2011prediction}
 Firstly, the interaction potential $u(r)$ is considered to be divided into two main contributions, a reference term (related to short-range repulsions) and a perturbation term (related to long-range attractive interactions), that is,
 \begin{equation} \label{eq:u(r)}
 u(r) = u_\text{ref}(r) + u_\text{pert}(r).
@@ -240,7 +241,7 @@ This leads to the approximation
 f_{0}(\rho) = f^{EoS} + \alpha\rho^2,
 \end{equation}
 where $\alpha$ is the interaction volume, in units of \hl{$energy*volume/mol^{2}$}, given by
-\pdfcomment[author=Charlles]{A unidade de alpha teria que ser (energia/volume)*(volume/mol)^2 = energia*volume/mol^2, não?}
+
 \begin{equation} \label{eq:alphav}
 \alpha = -\frac{1}{2} \int u_\text{att} dr,
 \end{equation}
@@ -296,12 +297,29 @@ f_{n}^{s} = f_{n-1} + \frac{\alpha \rho^2 \phi}{2^{2n}}
 \end{equation}
 
 The final Helmholtz free energy density is calculated as
-\pdfcomment[author=Charlles]{É necessário deixar mais claro de que artigo (ou artigos) esse equacionamento foi retirado}
+
 \begin{equation} \label{eq:ff}
 f = \lim_{n \rightarrow \infty} f_{n} - \alpha\rho^2.
 \end{equation}
 
-Here we considered $f_{5}$ to be the final Helmholtz free energy density (based on results to be presented on \cref{sec:pure-substance phase equilibrium results}).
+The term $-\alpha\rho^2$ in \cref{eq:ff} is included since we want to recover the fluids original behavior far away from the critical point, because in this condition $\lim_{n \rightarrow \infty} f_{n}$ tends to zero.
+It is important to note that other authors \cite{llovell2004thermodynamic,llovell2006global,llovell2006prediction,bymaster2008renormalization,tang2010renormalization}, following more closely the modifications suggested by Lue and Prausnitz \cite{lue1998brenormalization}, modify \cref{eq:f01,eq:ff}, which are calculated as
+
+\begin{equation} \label{eq:f022}
+f_{0}(\rho) = f^{EoS},
+\end{equation}
+
+and
+
+\begin{equation} \label{eq:ff2}
+f = \lim_{n \rightarrow \infty} f_{n}.
+\end{equation}
+
+These modifications are made when the saddle-point approximation is used within the method derivation (details are given in the work of Lue and Prausnitz \cite{lue1998brenormalization}).
+In literature, these approximations were used mainly with SAFT family of EoS, not being used with cubic-EoS, still, successful results were obtained in the latter case.
+This way, we chose to apply \cref{eq:f01,eq:ff} instead of \cref{eq:f022,eq:ff2} in this work.
+
+Here we considered five iterations to converge the renormalization method (based on results to be presented on \cref{sec:pure-substance phase equilibrium results}).
 To apply the renormalization procedure to mixtures, two major modifications were made.
 First, the isomorphic approximation \citep{fisher1968renormalization} was used instead of the phase space cell approximation.
 The main difference between the two approximations is that the former considers that the total density of the fluid is used to consider fluctuations, while the latter implies that each individual component in the mixture fluctuates independently.
@@ -324,7 +342,8 @@ These substances were chosen because of the different associative combinations t
 n-Butane and \ce{CO_2} were considered as non-associative substances, while methanol, ethanol, and \ce{H_{2}S} are considered as associative ones.
 There is a large discussion on the literature on the most adequate associating models and considerations to represent these substances, mainly \ce{CO_2} \citep{bjorner2016modeling} and \ce{H_{2}S} \citep{ruffine2006represent}.
 A common example is whether \ce{CO_2} should actually be considered as an associating molecule and, furthermore, whether the extent of quadrupole forces is important \cite{tsivintzelis2011modeling,bjorner2016modeling}.
-\pdfcomment[author=Charlles]{Já que existe essa discussão, devemos justificar por que escolhemos considerar CO2 como não-associativo.}
+As to diminish the influence of considered forces upon the renormalization procedure, we choose to consider \ce{CO_2} as non-associative, since we consider it to be a good approximation.
+Quadrupole forces are not considered in this work for \ce{CO_2} because we believe they deserve a special attention due its nature, which is not the scope of this work.
 
 The parameters for all substances are summarized in \cref{table:CPA_parameters}.
 For all cases, the \mbox{CR-1} combination rule is considered for the association parameters (comprised of arithmetic mean for the cross-association energy and geometric mean for the cross-association volume), because of its success in a good range of applications \cite{folas2005application,folas2006application,kontogeorgis2006ten1,kontogeorgis2006ten2}.
@@ -412,7 +431,7 @@ The obtained parameters are summarized in \cref{table:renorm_param}.
 		\begin{tabular}{lll}
 			\hline
 			Substance   & L ($\AA$) & $\phi$   \\ \hline
-			n-Butane& 4.85  & 3.40  \\
+			n-Butane& 6.16  & 1.96  \\
 			Methanol& 5.45  & 0.75  \\
 			Ethanol & 5.48  & 0.75  \\
 			\ce{CO_2} & 4.44  & 2.62 \\
@@ -442,9 +461,7 @@ To be conservative and by following other authors  \cite{llovell2004thermodynami
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{figures/PV_evol.png}}
-\caption{Vapor-liquid phase equilibrium envelope for methanol with CPA+RG at consecutive iterations of the renormalization method.
-	\pdfcomment[author=Charlles]{Mesmo problemas do gráfico anterior em relação aos "labels" e "titles" e ao índice mostrado na legenda. Também há uma inconsistência, já que tal índice começa em 0, diferentemente do gráfico anterior.}
-	}
+\caption{Vapor-liquid phase equilibrium envelope for methanol with CPA+RG at consecutive iterations of the renormalization method.}
 \label{fig:PV_evol}
 \end{figure}
 
@@ -496,23 +513,21 @@ Lines were obtained from calculations with the CPA+RG (\fulline) and CPA (\dashe
 
 \begin{table}[h!]
 \centering
-\caption{Absolute values of relative deviations (\%) of calculated critical points with respect to experimental data.
-\pdfcomment[author=Charlles]{Por que usar valores absolutos? Por que não apresentar o sinal de cada desvio?}
+\caption{Relative deviations (\%) of calculated critical points with respect to experimental data.
 }
 \label{table:AAD_crit}
 \begin{tabular}{cccccccl} \hline
-\multirow{2}{*}{Substance} & \multicolumn{2}{c}{$\displaystyle \bigg|\frac{T_{c}-T_{c}^\text{exp}}{T_{c}^\text{exp}}\bigg|$} & \multicolumn{2}{c}{$\displaystyle \bigg|\frac{P_{c}-P_{c}^\text{exp}}{P_{c}^\text{exp}}\bigg|$} & \multicolumn{2}{c}{$\displaystyle \bigg|\frac{\rho_{c}-\rho_{c}^\text{exp}}{\rho_{c}^\text{exp}}\bigg|$} &  \\ \cline{2-7}
+\multirow{2}{*}{Substance} & \multicolumn{2}{c}{$\displaystyle \left(\frac{T_{c}-T_{c}^\text{exp}}{T_{c}^\text{exp}}\right)$} & \multicolumn{2}{c}{$\displaystyle \left(\frac{P_{c}-P_{c}^\text{exp}}{P_{c}^\text{exp}}\right)$} & \multicolumn{2}{c}{$\displaystyle \left(\frac{\rho_{c}-\rho_{c}^\text{exp}}{\rho_{c}^\text{exp}}\right)$} &  \\ \cline{2-7}
    & CPA& CPA+RG  & CPA   & CPA+RG& CPA & CPA+RG   &  \\ \hline
 n-Butane   & 1.49   & 0.85& 13.54 & 6.32  & 8.01& 7.14 &  \\
-Methanol   & 4.49   & 0.26& 32.68 & 0.54  & 5.17& 0.43 &  \\
-Ethanol& 4.77   & 0.20 & 29.79 & 1.02  & 7.52& 1.39 &  \\
-\ce{CO_2}   & 1.91   & 0.53& 11.25 & 3.79  & 9.82& 3.75 &  \\
-\ce{H_{2}S}& 3.21   & 0.13& 19.79 & 6.00 & 2.96& 1.86 &  \\ \hline
+Methanol   & 4.49   & -0.12& 32.68 & 1.23  & 5.17& -2.28 &  \\
+Ethanol& 4.77   & 0.26 & 29.79 & 1.23  & 7.52& 1.63 &  \\
+\ce{CO_2}   & 1.91   & 0.09& 11.25 & 7.26  & 9.82& -4.53 &  \\
+\ce{H_{2}S}& 3.21   & -0.41& 19.79 & 4.26 & 2.96& -1.31 &  \\ \hline
 \end{tabular}
 \end{table}
 
 \cref{fig:crit_exp} shows that the CPA+RG presents correct critical exponent $\beta = 0.33$, very close to the universal experimental value, while the CPA equation of state presents a classical mean-field value, $\beta \sim 0.5$.
-\pdfcomment[author=Charlles]{As figuras deveriam ser comentadas na ordem em que elas aparecem. Portanto, deve-se postergar este comentário ou adiantar a figura em questão.}
 
 It is clear from \cref{fig:pure_LV,fig:sat_p} that the correction of the behavior of the fluid in the phase envelope when the conditions are near the critical region, leading to an asymptotic behavior at the critical point.
 As conditions become farther away from the critical point, the differences between the CPA equation of state and the CPA+RG become insignificant.
