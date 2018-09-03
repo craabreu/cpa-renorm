@@ -9,7 +9,8 @@ from collections import OrderedDict
 from matplotlib.transforms import blended_transform_factory
 
 file1 = 'isot_exp.csv'
-file2 = 'isot_cpa_cparg.csv'
+file2 = 'isot_cpa.csv'
+file3 = 'isot_cparg.csv'
 xlabel = r'$\rm Density\ (mol/L)$'
 ylabel = r'$\rm Pressure\ (MPa)$'
 
@@ -25,25 +26,29 @@ rho0 = np.array(out[1]).astype(np.float)/1e3
 P1 = np.array(out[2]).astype(np.float)
 rho1 = np.array(out[3]).astype(np.float)/1e3
 
-#Read values - calc values
+#Read values - calc values - CPA
 df = pd.read_csv('%s' %file2,sep=';',header=None)
 out = []
 out.append(df[:][0].values.tolist())
 out.append(df[:][1].values.tolist())
 out.append(df[:][2].values.tolist())
 out.append(df[:][3].values.tolist())
-out.append(df[:][4].values.tolist())
-out.append(df[:][5].values.tolist())
-out.append(df[:][6].values.tolist())
-out.append(df[:][7].values.tolist())
 CPA_P0 = np.array(out[0]).astype(np.float)
 CPA_rho0 = np.array(out[1]).astype(np.float)/1e3
-CPARG_P0 = np.array(out[2]).astype(np.float)
-CPARG_rho0 = np.array(out[3]).astype(np.float)/1e3
-CPA_P1 = np.array(out[4]).astype(np.float)
-CPA_rho1 = np.array(out[5]).astype(np.float)/1e3
-CPARG_P1 = np.array(out[6]).astype(np.float)
-CPARG_rho1 = np.array(out[7]).astype(np.float)/1e3
+CPA_P1 = np.array(out[2]).astype(np.float)
+CPA_rho1 = np.array(out[3]).astype(np.float)/1e3
+
+#Read values - calc values - CPARG
+df = pd.read_csv('%s' %file3,sep=';',header=None)
+out = []
+out.append(df[:][0].values.tolist())
+out.append(df[:][1].values.tolist())
+out.append(df[:][2].values.tolist())
+out.append(df[:][3].values.tolist())
+CPARG_P0 = np.array(out[0]).astype(np.float)
+CPARG_rho0 = np.array(out[1]).astype(np.float)/1e3
+CPARG_P1 = np.array(out[2]).astype(np.float)
+CPARG_rho1 = np.array(out[3]).astype(np.float)/1e3
 
 #plot
 fig, ax = plt.subplots(1,1)

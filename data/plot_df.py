@@ -27,8 +27,6 @@ out.append(df[:][2].values.tolist())
 out.append(df[:][3].values.tolist())
 out.append(df[:][4].values.tolist())
 out.append(df[:][5].values.tolist())
-out.append(df[:][6].values.tolist())
-out.append(df[:][7].values.tolist())
 
 #plot
 fig, ax = plt.subplots(1,1)
@@ -38,8 +36,6 @@ y1 = np.array(out[2]).astype(np.float)
 y2 = np.array(out[3]).astype(np.float)
 y3 = np.array(out[4]).astype(np.float)
 y4 = np.array(out[5]).astype(np.float)
-y5 = np.array(out[6]).astype(np.float)
-y6 = np.array(out[7]).astype(np.float)
 
 ax.tick_params(direction='in',size=6,labelsize=18)
 plt.plot(x0, y0, color='midnightblue', linewidth=1.0, linestyle='-',  label='n = 1')

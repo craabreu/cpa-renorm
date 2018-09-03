@@ -210,37 +210,17 @@ An illustration of the method is represented in Fig.~\ref{fig:schematics}.
 \end{figure}
 
 The renormalization group theory as introduced by White and co-workers \cite{white1993renormalization,white1995renormalization,white1998renormalization} and further developed by Lue and Prausnitz \cite{lue1998renormalization, lue1998brenormalization} is based on a transformation of the grand canonical partition function into a functional integral.
-To note, in this work we used the derivation provided by White and co-workers \cite{white1993renormalization,white1995renormalization,white1998renormalization}, and applied successfully by other authors for cubic-EoS \cite{cai2006vapor,pcm2017application,xu2010crossover,xu2011prediction}
-Firstly, the interaction potential $u(r)$ is considered to be divided into two main contributions, a reference term (related to short-range repulsions) and a perturbation term (related to long-range attractive interactions), that is,
-\begin{equation} \label{eq:u(r)}
-u(r) = u_\text{ref}(r) + u_\text{pert}(r).
-\end{equation}
-where $u(r)$ is the interaction potential, $u_\text{ref}(r)$ is the reference contribution, and $u_\text{pert}(r)$ is the perturbation contribution, with $r$ being the center-to-center molecular distance in cartesian coordinates, considering the interaction potential to be spherically symmetric.
-
-\hl{Gabriel: Este r é a distância entre duas partículas em coordenadas cartesianas, entretanto, na gênese do método se considera que o potencial no qual as partículas interagem é esfericamente simétrico, deve-se incluir também esta informação?
-	
-Charlles: É por isso que estranho a ausência de um termo $4\pi r^2$ nas integrais definidas abaixo. Eu esperaria uma integração feita no volume, o que em coordenadas esféricas dependeria de r, phi e theta. Porém, a consideração de interação esfericamente simétrica faria com que a integração em phi e theta pudesse ser feita analiticamente, resultando em $4\pi r^2$.
-
-Charlles2: Já que você cita 'cartesian coordinates', o correto não seria center-to-center molecular distance vector? Isso significaria que a mudança para coordenadas esféricas e integração em phi e theta ainda não foi feita.}
-
+To note, in this work we used the derivation provided by White and co-workers \cite{white1993renormalization,white1995renormalization,white1998renormalization}, and applied successfully by other authors for cubic-EoS \cite{cai2006vapor,pcm2017application,xu2010crossover,xu2011prediction}, details of the method can be found in these works.
+To briefly address the method, the interaction potential $u(r)$ is considered to be divided into two main contributions, a reference term (related to short-range repulsions) and a perturbation term (related to long-range attractive interactions)
 Considering that the repulsive part of the potential accounts only for very-short-wavelength fluctuations and that the perturbation part takes into account both short- and long-wavelength fluctuations, the renormalization method is applied only to the attractive part.
-Mean-field theories are considered to provide a good approximation for the short-range repulsions and fluctuations smaller than a given cutoff length $L$.
-The integral responsible for accounting for the short-wavelength fluctuations is
-\begin{equation} \label{eq:Fs}
-F_{s}(\rho) = \int f^\text{EoS} dr,
-\end{equation}
-where $f^\text{EoS}$ is the Helmholtz free energy density calculated using the mean-field theory (in this work, the CPA equation of state), thus
-\begin{equation} \label{eq:f_to_a}
-%f^{EoS} = \frac{\bar{a}^{EoS}}{v}.
-f^\text{EoS} = \rho \bar{a}^{EoS}.
-\end{equation}
+Mean-field theories are then used because we consider then to provide a good approximation for the short-range repulsions and fluctuations smaller than a given cutoff length $L$.
 
 As we are concerned only with the attractive part, in order to apply the renormalization method we need to subtract the attractive potential already included in the mean-field solution, considering it to be a bad approximation, since the mean-field theory cannot deal accurately with long-wavelength fluctuations.
 This leads to the approximation
 \begin{equation} \label{eq:f01}
 f_{0}(\rho) = f^{EoS} + \alpha\rho^2,
 \end{equation}
-where $\alpha$ is the interaction volume, in units of \hl{$energy*volume/mol^{2}$}, given by
+where $f^\text{EoS}$ is the Helmholtz free energy density calculated using the mean-field theory (in this work, the CPA equation of state), and $\alpha$ is the interaction volume, in units of \hl{$energy*volume/mol^{2}$}, given by
 
 \begin{equation} \label{eq:alphav}
 \alpha = -\frac{1}{2} \int u_\text{att} dr,
@@ -432,7 +412,7 @@ The obtained parameters are summarized in \cref{table:renorm_param}.
 			\hline
 			Substance   & L ($\AA$) & $\phi$   \\ \hline
 			n-Butane& 6.16  & 1.96  \\
-			Methanol& 5.45  & 0.75  \\
+			Methanol& 5.50  & 0.60  \\
 			Ethanol & 5.48  & 0.75  \\
 			\ce{CO_2} & 4.44  & 2.62 \\
 			\ce{H_{2}S} & 4.30  & 2.40 \\ \hline 
@@ -473,7 +453,7 @@ Results concerning phase equilibrium calculations are summarized in \cref{fig:pu
 \makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{figures/PV_pure_4.png}}
 \caption{Vapor-liquid phase equilibrium envelope obtained for several substances.
 Lines are obtained from calculations with the CPA+RG (\fulline) and CPA (\dashedline) methods.
-Experimental data (symbols) were extracted from the NIST database \cite{nistfluids}.
+Experimental data (symbols) were extracted from the NIST database \cite{nistfluids}.}
 \pdfcomment[author=Charlles]{Problemas com esta figura:
 	2) Onde estão os resultados para etanol?
 }
@@ -494,7 +474,7 @@ Experimental data (symbols) were extracted from the NIST database \cite{nistflui
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{figures/beta.png}}
-\caption{Critical exponent calculation for methanol, resulting in $\beta = 0.330$ with CPA+RG and $\beta =0.498$ with CPA.
+\caption{Critical exponent calculation for methanol, resulting in $\beta = 0.330$ with CPA+RG and $\beta =0.496$ with CPA.
 Symbols are obtained from calculations with the CPA+RG ($\circ$) and CPA ($\square$) methods.
 Lines (\dashedline) were obtained by linear regression.
 The value of $\beta$ obtained from CPA+RG is very close to the experimental value.}
@@ -517,22 +497,21 @@ Lines were obtained from calculations with the CPA+RG (\fulline) and CPA (\dashe
 }
 \label{table:AAD_crit}
 \begin{tabular}{cccccccl} \hline
-\multirow{2}{*}{Substance} & \multicolumn{2}{c}{$\displaystyle \left(\frac{T_{c}-T_{c}^\text{exp}}{T_{c}^\text{exp}}\right)$} & \multicolumn{2}{c}{$\displaystyle \left(\frac{P_{c}-P_{c}^\text{exp}}{P_{c}^\text{exp}}\right)$} & \multicolumn{2}{c}{$\displaystyle \left(\frac{\rho_{c}-\rho_{c}^\text{exp}}{\rho_{c}^\text{exp}}\right)$} &  \\ \cline{2-7}
+\multirow{2}{*}{Substance} & \multicolumn{2}{c}{$\displaystyle \left(100\frac{T_{c}-T_{c}^\text{exp}}{T_{c}^\text{exp}}\right)$} & \multicolumn{2}{c}{$\displaystyle \left(100\frac{P_{c}-P_{c}^\text{exp}}{P_{c}^\text{exp}}\right)$} & \multicolumn{2}{c}{$\displaystyle \left(100\frac{\rho_{c}-\rho_{c}^\text{exp}}{\rho_{c}^\text{exp}}\right)$} &  \\ \cline{2-7}
    & CPA& CPA+RG  & CPA   & CPA+RG& CPA & CPA+RG   &  \\ \hline
 n-Butane   & 1.49   & 0.85& 13.54 & 6.32  & 8.01& 7.14 &  \\
-Methanol   & 4.49   & -0.12& 32.68 & 1.23  & 5.17& -2.28 &  \\
+Methanol   & 4.49   & -0.26& 32.68 & 0.24  & 5.17& -1.51 &  \\
 Ethanol& 4.77   & 0.26 & 29.79 & 1.23  & 7.52& 1.63 &  \\
 \ce{CO_2}   & 1.91   & 0.09& 11.25 & 7.26  & 9.82& -4.53 &  \\
 \ce{H_{2}S}& 3.21   & -0.41& 19.79 & 4.26 & 2.96& -1.31 &  \\ \hline
 \end{tabular}
 \end{table}
 
-\cref{fig:crit_exp} shows that the CPA+RG presents correct critical exponent $\beta = 0.33$, very close to the universal experimental value, while the CPA equation of state presents a classical mean-field value, $\beta \sim 0.5$.
+\cref{fig:crit_exp} shows that the CPA+RG presents a critical exponent closer to the universal experimental value ($\beta = 0.330$), while the CPA equation of state presents a classical mean-field value of $\beta \sim 0.496$.
 
 It is clear from \cref{fig:pure_LV,fig:sat_p} that the correction of the behavior of the fluid in the phase envelope when the conditions are near the critical region, leading to an asymptotic behavior at the critical point.
 As conditions become farther away from the critical point, the differences between the CPA equation of state and the CPA+RG become insignificant.
 This result is expected due the fact that long-wavelength fluctuations at this point are less important, and then the renormalization method does not imply any changes into the Helmholtz energy.
-
 
 \cref{fig:pure_isotherm} shows the change in phase equilibrium modeling at critical and supercritical isotherms.
 The CPA+RG approach is able to better predict the fluids phase behavior, because the CPA equation of state overpredicts the critical point, it describes a binary vapor-liquid phase up to its erroneous critical point, while the CPA+RG approach already describes the fluid as supercritical.
@@ -574,7 +553,7 @@ Squares Experimental data extracted from Leu et al.
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=0.75\textwidth]{figures/bin_h2s_co2.png}}
-\caption{vapor-liquid equilibrium phase envelope for \ce{H_{2}S} + \ce{CO_2} mixture in temperatures 273.15K (below) and 313.15K (above).
+\caption{vapor-liquid equilibrium phase envelope for \ce{H_{2}S} + \ce{CO_2} mixture in temperatures 303.15K (below) and 328.15K (above).
 Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline).
 Experimental data extracted from Bierlein et al.
  \cite{bierlein1953phase} ($\square$,$\circ$)}
@@ -599,7 +578,7 @@ As expected, in conditions far away from the critical point, the change is very 
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{figures/cv_cp_compressed.png}}
-\caption{Isochoric and isobaric residual heat capacity for methanol at subcritical conditions in the compressed liquid region, symbols are experimental data from NIST database \cite{nistfluids} at Tr=0.8 ($\square$) and Tr=0.9 ($\circ$).
+\caption{Isochoric and isobaric residual heat capacity for methanol at subcritical conditions in the compressed liquid region, symbols are experimental data from NIST database \cite{nistfluids} at T=461.34K ($\circ$), T=486.97K ($\square$) and T=507.47K ($\diamond$).
 Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
 \label{fig:cv_cp_compressed}
 \end{figure}
@@ -608,7 +587,7 @@ Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{figures/u_compressed.png}}
-\caption{Speed of sound for methanol at subcritical conditions in the compressed liquid region, symbols are experimental data from NIST database at Tr=0.8 ($\square$) and Tr=0.9 ($\circ$).
+\caption{Speed of sound for methanol at subcritical conditions in the compressed liquid region, symbols are experimental data from NIST database at T=461.34K ($\circ$), T=486.97K ($\square$) and T=507.47K ($\diamond$).
 Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
 \label{fig:u_compressed}
 \end{figure}
@@ -620,7 +599,7 @@ It is though, advisable to use parameters that overestimate the speed of sound.
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{figures/cv_cp_critical.png}}
-\caption{Isochoric and isobaric residual heat capacity for methanol at the critical isotherm (512.6K).
+\caption{Isochoric and isobaric residual heat capacity for methanol at the critical isotherm (T=512.6K).
 Experimental data from NIST database \cite{nistfluids} ($\square$).
 Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
 \label{fig:cv_cp_critical}
@@ -649,7 +628,7 @@ Very peculiar results concerning the speed of sound opens a discussion on whethe
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{figures/cv_cp_supercrit.png}}
-\caption{Isochoric and isobaric residual heat capacity for methanol at supercritical isotherms, symbols are experimental data from NIST database \cite{nistfluids} at Tr=1.1 ($\circ$) and Tr=1.2 ($\square$).
+\caption{Isochoric and isobaric residual heat capacity for methanol at supercritical isotherms, symbols are experimental data from NIST database \cite{nistfluids} at T=517.72K ($\circ$), T=538.23K ($\square$) and T=563.86K ($\diamond$).
 Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
 \label{fig:cv_cp_supercritical}
 \end{figure}
@@ -658,7 +637,7 @@ Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
 \centering
 \captionsetup{justification=centering}
  \makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{figures/u_supercritical.png}}
-\caption{Speed of sound for methanol at supercritical isotherms, symbols are experimental data from NIST database \cite{nistfluids} at Tr=1.1 ($\circ$) and Tr=1.2 ($\square$).
+\caption{Speed of sound for methanol at supercritical isotherms, symbols are experimental data from NIST database \cite{nistfluids} at T=517.72K ($\circ$), T=538.23K ($\square$) and T=563.86K ($\diamond$).
 Lines are calculated from CPA+RG(\fulline) and CPA(\dashedline)}
 \label{fig:u_supercritical}
 \end{figure}
