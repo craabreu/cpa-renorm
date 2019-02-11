@@ -75,7 +75,7 @@ out.append(df[:][2].values.tolist())
 out.append(df[:][3].values.tolist())
 x328cr = np.array(out[0]).astype(np.float)
 y328cr = np.array(out[1]).astype(np.float)
-P328cr = np.array(out[3]).astype(np.float)/1000
+P328cr = np.array(out[3]).astype(np.float)
 
 #plot
 fig, ax = plt.subplots(1,1)

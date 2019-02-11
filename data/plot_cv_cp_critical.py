@@ -43,7 +43,7 @@ CPARG_Cv = np.array(out[1]).astype(np.float)
 #END Cv===============================================================
 
 #BEGIN Cp--------------------------------------------------------------
-file1 = 'cp_10_11_12_exp.csv'
+file1 = 'cp_10_101_105_110_exp.csv'
 file2 = 'cp_10_cpa.csv'
 file3 = 'cp_10_cparg.csv'
 
