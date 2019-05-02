@@ -9,7 +9,6 @@
 \usepackage{pdfcomment}
 \usepackage{makecell}
 
-
 \date{\vspace{-5ex}}
 
 %\usepackage[numbers,sort&compress]{natbib}
@@ -119,9 +118,9 @@ Since its first application \citep{white1993renormalization}, White and Zhang’
 They themselves, for instance, extended the range in which the method could be applied \cite{white1998renormalization}.
 Lue and Prausnitz \cite{lue1998renormalization, lue1998brenormalization} and Mi \textit{et al}. \cite{mi2004improved} improved the method so that it can be applied to a large temperature range, even far away from the critical point.
 Thus far, many authors have applied this method using different mean-field theories (e.g.
-Mean-Spherical Approximation (MSA) \citep{lue1998renormalization}, equation of state for chain-like molecules \cite{jiang1999equation, jiang2000phase}, the SAFT equation and its variants \cite{llovell2004thermodynamic, forte2011application, bymaster2008renormalization, tang2010renormalization, llovell2006global, forte2013application, dias2009thermodynamic, llovell2006second, llovell2006prediction, llovell2007phase}, cubic equations \cite{xu2011prediction,xu2010crossover,pcm2017application,llovell2008accurate,qiu2006vapor,cai2006vapor,cai2004thermodynamics}, and others \cite{ghobadi2013renormalization,choi2016renormalization}), obtaining similarly good results.
+Mean-Spherical Approximation (MSA) \citep{lue1998renormalization}, equation of state for chain-like molecules \cite{jiang1999equation, jiang2000phase}, the SAFT equation and its variants \cite{llovell2004thermodynamic, forte2011application, bymaster2008renormalization, tang2010renormalization, llovell2006global, forte2013application, dias2009thermodynamic, llovell2006second, llovell2006prediction, llovell2007phase}, cubic equations \cite{xu2011prediction,xu2010crossover,pcm2017application,llovell2008accurate,qiu2006vapor,cai2006vapor,cai2004thermodynamics,vinhal2018application}, and others \cite{ghobadi2013renormalization,choi2016renormalization}), obtaining similarly good results.
 However, some aspects in the method are still unclear, including parameter estimation procedures and approximations in the renormalization equations.
-Hence, there is still need for further assessment of the method's capabilities and limitations.
+Hence, there is still need for further assessment of the method's capabilities and limitations. Few authors have explored the impact of this method into derivative properties \cite{forte2013application,llovell2006second,llovell2007phase,dias2009thermodynamic}, and in all these cases no cubic equation of state was evaluated.
 
 The present work aims at evaluating the impacts on modeling phase equilibrium and derivative properties when applying the renormalization group theory with the CPA equation of state, referred to as the CPA+RG approach for short.
 We studied several pure substances, as well as different mixtures containing \ce{CO_2} or \ce{H_{2}S}, in conditions near-to and far away from the critical point.
@@ -207,7 +206,7 @@ An illustration of the method is presented in Fig.~\ref{fig:schematics}.
 \centering
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{figures/renorm_schematics.png}}
-\caption{Schematic representation of the phase space cell approximation. First, interactions between molecules are calculated with a mean-field theory. Next, fluctuations are included and \hl{groups of molecules close to each other are considered to form clusters that behave as single entities. Then, iterations are carried out until.......}}
+\caption{Schematic representation of the phase space cell approximation. First, interactions between molecules are calculated with a mean-field theory. Next, fluctuations are included and groups of molecules close to each other are considered to form clusters that behave as single entities. Then, iterations are carried out until no further changes to the system's energy are observed}
 \label{fig:schematics}
 \end{figure}
 
@@ -222,9 +221,9 @@ This leads to the approximation
 \begin{equation} \label{eq:f01}
 f_{0}(\rho) = f^{EoS} + \alpha\rho^2,
 \end{equation}
-where $f^\text{EoS}$ is the Helmholtz free energy density calculated using the mean-field theory (in this work, the CPA equation of state), and $\alpha$ is the interaction volume, in units of \hl{$\mathrm{energy \times volume/mol^2}$}, given by
+where $f^\text{EoS}$ is the Helmholtz free energy density calculated using the mean-field theory (in this work, the CPA equation of state), and $\alpha$ is the interaction volume, in units of $\mathrm{energy \times volume/mol^2}$, given by
 \begin{equation} \label{eq:alphav}
-\alpha = -\frac{1}{2} \int u_\text{att} dr,
+\alpha = -\frac{1}{2} \int u_\text{att} d\textbf{r},
 \end{equation}
 where $u_\text{att}$ is the attractive part of the potential.
 Since there is no explicit potential for the CPA equation of state, considering previous work with both the SRK and CPA equations of state \cite{cai2004thermodynamics, pcm2017application, xu2010crossover}, the attractive part of the potential is correlated to half the value of parameter $a$, which here is considered as an approximation to the contribution of the attractive part of the potential (divided by the volume) to the Helmholtz free energy density.
@@ -396,9 +395,9 @@ O.F.=\sum_{i=1}^{n_\text{exp}}\left[ \left(\frac{\rho_{i}^\text{liq,exp}-\rho_{i
 Properties were used in the temperature range from near-critical conditions up to the critical point ($T_r=0.98$ to $T_r=1.0$).
 Both liquid and vapor densities were included.
 Many different approaches have been used in the literature (a good review on this subject can be found in Bymaster \textit{et al}. \cite{bymaster2008renormalization}) to estimate these parameters.
-\hl{In order to have a first evaluation of both parameters for the CPA EoS, we decided to fit both parameters}.
+Here, we decided to fit both parameters.
 
-A Particle Swarm Optimization algorithm \hl{reference needed here} was used to find the minimum of the objective function.
+A Particle Swarm Optimization algorithm \cite{kennedy1995particle} was used to find the minimum of the objective function.
 The obtained parameters are summarized in \cref{table:renorm_param}.
 
 \begin{table}[ht!]
@@ -514,8 +513,8 @@ This result is expected due the fact that long-wavelength fluctuations are less 
 \cref{fig:pure_isotherm} shows the change in the shapes of critical and supercritical isotherms.
 The CPA+RG approach is able to provide a better prediction of the fluid phase behavior.
 Because the CPA equation of state overestimates the critical point, it yields a two-phase-like curvature at the experimental critical temperature, while the CPA+RG approach correctly yields a saddle point.
-\hl{The changes in free energy for the supercritical isotherm are smaller than those for the critical isotherm}.
-In \cref{fig:sat_p} \hl{it is clear that the renormalization method has a tendency to overestimate pressure.}
+The observed changes in the supercritical isotherm are smaller than those for the critical isotherm when comparing CPA+RG approach to the CPA equation of state.
+In \cref{fig:sat_p} it is clear that the renormalization method has a tendency to slightly overestimate pressure.
 
 In order to have a clear comparison between the abilities of the two methods in estimating the critical points of all considered substances, in \cref{table:AAD_crit} we present numerical values of the achieved relative errors.
 It shows that the errors committed by using the CPA+RG approach are systematically smaller than those with the CPA equation of state, which consistently overestimates the values of all critical properties.
@@ -524,7 +523,7 @@ It shows that the errors committed by using the CPA+RG approach are systematical
 
 In our study of the phase behavior of binary systems, we evaluated mixtures comprising three categories at both subcritical and critical conditions: 1) two non-associating components (\ce{CO_2} + n-butane); 2) one associating and one non-associating component (\ce{H_{2}S} + \ce{CO_2}); and 3) two associating components (\ce{H_{2}S} + methanol).
 As already mentioned, the CR-1 combining rule was used in all cases.
-\hl{Solvation phenomena is not considered for the case of} \ce{H_{2}S} + \ce{CO_2}.
+No cross-association is considered for the \ce{H_{2}S} + \ce{CO_2} case. In this section, results for the application of the renormalization method are predictive, since no extra parameters were considered, only those estimated for pure substances as mentioned in section~\ref{sec:Parameter Estimation}.
 
 \begin{figure}[!ht]
 	\centering
@@ -565,13 +564,14 @@ On correcting the fluid behavior at these conditions, the phase equilibrium repr
 The results were similar for all evaluated mixtures.
 They make it clear that the CPA+RG approach improves the ability of the CPA equation of state in the phase equilibrium modeling of binary mixtures.
 Apparently, the fact of having associative or non-associative components in the mixture has no important impact in the overall performance of the renormalization method.
-\hl{ADDED: It is important to stress that all binary-mixture results shown in this section are predictive, in the sense that no parameters were used other than those obtained for pure substances.}
 
 \subsection{Derivative Properties of a Pure Substance}
 
 To assess the impact of the renormalization method on derivative properties, we calculated the residual isochoric and isobaric heat capacities of methanol, as well as its speed of sound, under diverse conditions: 1) at the compressed liquid region close to the critical state, 2) at the critical isotherm, and 3) at supercritical isotherms.
+All derivative properties results calculated with the renormalization method are predictive, since both renormalization parameters were estimated using phase equilibrium data.
 Details of the calculations are given in the Appendix C.
 
+We chose methanol as a model component for the evaluation of derivative properties, since it is a rather simple substance (comparing with the others in this work) which exhibits association phenomena, thus being desirable to use the CPA equation of state in this case.
 Concerning the compressed liquid region, \cref{fig:cv_cp_compressed} contains results for the residual heat capacities while \cref{fig:u_compressed} contains results for the speed of sound.
 
 \begin{figure}[!ht]
@@ -579,8 +579,7 @@ Concerning the compressed liquid region, \cref{fig:cv_cp_compressed} contains re
 \captionsetup{justification=centering}
 \makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{figures/cv_cp_compressed.png}}
 \caption{Isochoric and isobaric residual heat capacities of methanol at subcritical conditions in the compressed liquid region. Symbols are experimental data obtained from the NIST database \cite{nistfluids} at T=461.34~K ($\circ$), T=486.97~K ($\square$) and T=507.47~K ($\diamond$).
-Lines were calculated using the CPA+RG method (\fulline) and the CPA equation of state (\dashedline).
-\hl{Qual é a causa do comportamento sinuoso da curva verde?}.}
+Lines were calculated using the CPA+RG method (\fulline) and the CPA equation of state (\dashedline).}
 \label{fig:cv_cp_compressed}
 \end{figure}
 
@@ -595,11 +594,10 @@ Lines were calculated using the CPA+RG method (\fulline) and the CPA equation of
 
 \cref{fig:cv_cp_compressed} shows that the renormalization method had only a minor effect on bringing the model-based curves closer to the experimental ones.
 There is a clear tendency of increasing both heat capacities, which is observed mainly at the lower pressures.
-\hl{This effect increases very slightly the slope of the heat capacity curves at lower pressures}.
+No considerable changes were observed in the slope of the heat capacity curves.
 As expected, the change is very small in conditions far away from the critical point.
 
 Results of speed of sound at the compressed liquid region, presented in \cref{fig:u_compressed}, show that the speed of sound decreases very slightly after applying the renormalization method.
-\hl{It is though, advisable to use parameters that overestimate the speed of sound}.
 
 At the experimental critical temperature, both isochoric and isobaric heat capacity predictions (\cref{fig:cv_cp_critical}) are improved with the renormalization method.
 Changes are noticeable in the behavior of the curves, since the CPA equation of state still predicts a two-phase equilibrium state, while the CPA+RG approach already predicts that this condition is a near-critical/critical state.
@@ -633,7 +631,9 @@ Such very peculiar results concerning the speed of sound opens up a discussion o
 Results at supercritical conditions are shown in \cref{fig:cv_cp_supercritical,fig:u_supercritical}.
 In this case, contrary to what occurs in the compressed liquid region, there is a tendency of underestimating the isobaric heat capacity when the renormalization method is applied, while the isochoric heat capacity is still overestimated.
 Regarding \cref{fig:u_supercritical}, it is clear that the renormalization method overestimates the speed of sound at pressures near the minimum of each curve and underestimates it at higher pressures.
-\hl{Falta uma discussão mais detalhada sobre os possíveis motivos para os comportamentos observados.}
+
+As it is shown, in overall, the renormalization method implies more pronounced changes when we near the critical point, these results can be expected because of two main reasons. First, as we apply the method there is a shift to the critical point calculated by the equation of state, approximating it to the experimental one and therefore changing the derivative properties curves nearer to the experimental data. Second, the method corrects the classical behavior of the equations of state, bringing the characteristic non-classical behavior of the experimental data to the model, therefore approximating the behavior of the derivative properties calculated by the model to the experimental data. However, as seen here, there is still some disagreement between the model with renormalization and experimental data.
+There is the need for further investigation on this topic to find the roots of this disagreement, evaluating other substances and equations of state.
 
 \begin{figure}[!ht]
 \centering
@@ -661,11 +661,11 @@ In all cases, the model behavior is improved when compared to experimental data,
 A great advantage of the implemented method is that binary mixture calculations are computationally simple.
 Its only major drawback is the introduction of two extra parameters per substance.
 
-Considering the parameter estimation, \hl{only the renormalization parameters do not guarantee} improvements on the representation of isobaric heat capacicies and speed of sound.
-In order to model both thermodynamic properties and phase equilibrium in near-critical conditions using equations of state, it might be necessary to do parameter estimation using data from both types, or even re-estimate the equation of state parameters, which are usually obtained from data far away from the critical point only.
-As we faced problems \hl{which problems?} with the used parameter estimation method, PSO, a more robust algorithm is indicated \hl{for example?}.
+Considering the derivative properties discussed, the renormalization approach alone does not guarantee improvements on the representation of isobaric heat capacities and speed of sound.
+In order to model both thermodynamic properties and phase equilibrium in near-critical conditions using equations of state, it might be necessary to do a parameter estimation using data from both types, or even re-estimate the equation of state parameters, which are usually obtained from data far away from the critical point only.
+As we observed a local minima problem in the parameter estimation, it is desirable to use a global search algorithm, such as the PSO method used in this work.
 
-Our results suggest that the used renormalization-group methodology, together with the CPA equation of state, is a better tool than the CPA equation alone to describe phase equilibrium and derivative properties of pure acid gases, as well as binary mixtures containing them, in a large range of conditions, from subcritical up to supercritical ones. \hl{A maior parte dos resultados de puros se refere a metanol.}
+Our results suggest that the used renormalization-group methodology, together with the CPA equation of state, is a better tool than the CPA equation alone to describe phase equilibrium and derivative properties of pure substances, as well as binary mixtures, in a large range of conditions, from subcritical up to supercritical ones.
 
 \section{Acknowledgments}
 We thank Prof. Leo Lue for providing us with a code for the renormalization-group method within the MSA approach, which allowed us to compare results and validate our own code.
@@ -880,7 +880,7 @@ C_{v}^\mathrm{ig} = C_{p}^\mathrm{ig} - R
 \begin{equation} \label{eq:u_deriv}
 c_\mathrm{sound} = \sqrt{\frac{C_{p}}{M_{w} C_{v}}\left(\frac{\partial P}{\partial \rho}\right)_{T,\textbf{n}}}
 \end{equation}
-where $C_{p}^\mathrm{ig}$ is the ideal gas heat capacity obtained from a database correlation \hl{[REF]}.
+where $C_{p}^\mathrm{ig}$ is the ideal gas heat capacity obtained from a database correlation \cite{SmithVanNess}.
 All derivatives are calculated using the finite-difference method with five-point-stencils.
 
 \end{appendices}
